@@ -12,11 +12,13 @@ name: Release
 # whole workflow stays valid and runnable with zero secrets configured.
 #
 # Secrets consumed (all optional — absence = dry-run):
-#   ANDROID_KEYSTORE_BASE64  base64 of the release .jks
-#   ANDROID_STORE_PASSWORD   keystore password
-#   ANDROID_KEY_PASSWORD     key password
-#   ANDROID_KEY_ALIAS        key alias (e.g. "aul")
-#   DATABASE_URL             Postgres DSN for `aul publish-version`
+#   ANDROID_KEYSTORE_BASE64     base64 of the release .jks
+#   ANDROID_STORE_PASSWORD      keystore password
+#   ANDROID_KEY_PASSWORD        key password
+#   ANDROID_KEY_ALIAS           key alias (e.g. "aul")
+#   GOOGLE_SERVICES_JSON_BASE64 base64 of android/app/google-services.json;
+#                               WITHOUT it the APK builds but push is inert
+#   DATABASE_URL                Postgres DSN for `aul publish-version`
 
 on:
   push:
@@ -69,7 +71,11 @@ jobs:
       # Decode the keystore and scaffold android/key.properties in the exact
       # shape app/android/app/build.gradle.kts expects:
       #   rootProject.file("key.properties")  → app/android/key.properties
-      #   storeFile resolved relative to app/android → ../aul-release.jks
+      #   storeFile goes through file() inside the :app module, so a RELATIVE
+      #   path resolves against app/android/app/ — not app/android/. Write an
+      #   absolute path, exactly as gen-keystore.sh does locally; "../aul-release.jks"
+      #   silently became app/android/aul-release.jks and failed the build at
+      #   :app:validateSigningRelease.
       # This matches gen-keystore.sh so a signed `flutter build apk --release`
       # picks up the release signingConfig.
       - name: Configure release signing
@@ -86,9 +92,27 @@ jobs:
             echo "storePassword=${ANDROID_STORE_PASSWORD}"
             echo "keyPassword=${ANDROID_KEY_PASSWORD}"
             echo "keyAlias=${ANDROID_KEY_ALIAS}"
-            echo "storeFile=../aul-release.jks"
+            echo "storeFile=${GITHUB_WORKSPACE}/app/aul-release.jks"
           } > app/android/key.properties
           echo "Wrote app/android/key.properties and app/aul-release.jks (release signing enabled)."
+
+      # Firebase config for background push. It is gitignored on purpose (it is
+      # per-operator — see android/app/build.gradle.kts), so it does NOT exist in
+      # a fresh checkout. Without this secret the build still succeeds and the
+      # google-services plugin is simply never applied — an APK that installs and
+      # runs but can never receive a push. Warn loudly rather than ship that by
+      # accident.
+      - name: Configure Firebase (FCM push)
+        env:
+          GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}
+        run: |
+          set -eu
+          if [ -z "${GOOGLE_SERVICES_JSON_BASE64:-}" ]; then
+            echo "::warning::No GOOGLE_SERVICES_JSON_BASE64 secret — this APK is built WITHOUT push notifications."
+            exit 0
+          fi
+          echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 --decode > app/android/app/google-services.json
+          echo "Wrote app/android/app/google-services.json (FCM push enabled)."
 
       - name: Build release APK
         working-directory: app
@@ -138,6 +162,28 @@ jobs:
 
           echo "Built $APK_PATH  (versionCode=$VERSION_CODE)"
           echo "SHA-256: $SHA256"
+
+      # The failure mode that ships silently: build.gradle.kts falls back to DEBUG
+      # signing whenever key.properties is missing or unreadable, yielding an APK
+      # that installs fine but can never be updated by a real release (different
+      # signing identity). Assert the signer is the release cert before publishing.
+      - name: Verify the APK is release-signed
+        if: steps.detect.outputs.has_keystore == 'true'
+        run: |
+          set -eu
+          APKSIGNER="$(find "${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}/build-tools" \
+            -name apksigner -type f 2>/dev/null | sort -V | tail -1 || true)"
+          if [ -z "$APKSIGNER" ]; then
+            echo "::warning::apksigner not found — skipping the signature check."
+            exit 0
+          fi
+          CERTS="$("$APKSIGNER" verify --print-certs "$APK_PATH")"
+          echo "$CERTS" | grep -E 'certificate DN|certificate SHA-256' || true
+          if echo "$CERTS" | grep -q 'CN=Android Debug'; then
+            echo "::error::APK is DEBUG-signed — the release keystore was not picked up."
+            exit 1
+          fi
+          echo "Release signature confirmed."
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
