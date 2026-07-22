@@ -87,11 +87,11 @@ func Run(ctx context.Context, opts Options) error {
 	env := composeEnv(os.Environ(), res, pepper, dbPath)
 
 	logPath := filepath.Join(dataDir, "server.log")
-	logFile, err := os.OpenFile(logPath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0o600)
+	logFile, err := os.OpenFile(logPath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0o600) // #nosec G304 -- server.log inside our own data dir
 	if err != nil {
 		return fmt.Errorf("open server log %s: %w", logPath, err)
 	}
-	defer logFile.Close()
+	defer func() { _ = logFile.Close() }()
 	// Both child streams write to one locked sink: exec copies stdout and stderr
 	// in separate goroutines, so the mutex prevents interleaved lines in the file.
 	sink := newLockedWriter(io.MultiWriter(logFile, os.Stderr))
@@ -100,7 +100,7 @@ func Run(ctx context.Context, opts Options) error {
 		newCmd: func() *exec.Cmd {
 			// Plain exec.Command, NOT CommandContext: ctx cancellation must not
 			// hard-kill the child. The supervisor drives the graceful stop itself.
-			cmd := exec.Command(serverBin)
+			cmd := exec.Command(serverBin) //nolint:noctx // see above: cancellation must not hard-kill the child
 			cmd.Env = env
 			cmd.Stdout = sink
 			cmd.Stderr = sink
@@ -179,7 +179,7 @@ func warnIfOriginChanged(dataDir string, res resolved) {
 	}
 	path := filepath.Join(dataDir, "origin.pinned")
 	cur := res.Origin
-	if prev, err := os.ReadFile(path); err == nil {
+	if prev, err := os.ReadFile(path); err == nil { // #nosec G304 -- origin.pinned inside our own data dir
 		switch p := strings.TrimSpace(string(prev)); {
 		case p == cur:
 			return // unchanged — nothing to record or warn about

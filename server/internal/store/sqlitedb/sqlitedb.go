@@ -65,7 +65,7 @@ func Open(ctx context.Context, path string) (*sql.DB, error) {
 	pingCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
 	defer cancel()
 	if err := sqlDB.PingContext(pingCtx); err != nil {
-		sqlDB.Close()
+		_ = sqlDB.Close()
 		return nil, fmt.Errorf("sqlitedb: ping %q: %w", path, err)
 	}
 	return sqlDB, nil
@@ -96,7 +96,7 @@ func OpenAndMigrate(ctx context.Context, path string) (*sql.DB, error) {
 		return nil, err
 	}
 	if err := Migrate(ctx, sqlDB); err != nil {
-		sqlDB.Close()
+		_ = sqlDB.Close()
 		return nil, err
 	}
 	return sqlDB, nil

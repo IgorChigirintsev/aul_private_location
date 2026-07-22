@@ -18,17 +18,19 @@ type statusInfo struct {
 // replaced by localhost in an invite — and the closing note is the honest
 // keep-this-PC-on caveat every self-host operator must understand.
 func printStatus(w io.Writer, info statusInfo) {
-	fmt.Fprintln(w, "  Aul self-host is running.")
-	fmt.Fprintln(w)
-	fmt.Fprintf(w, "  Mode:       %s\n", modeLabel(info.res))
-	fmt.Fprintf(w, "  Origin:     %s\n", info.res.Origin)
-	fmt.Fprintf(w, "  Dashboard:  %s\n", info.res.Origin)
-	fmt.Fprintf(w, "  Data dir:   %s\n", info.dataDir)
-	fmt.Fprintf(w, "  Server log: %s\n", info.logPath)
-	fmt.Fprintln(w)
-	fmt.Fprintln(w, "  Keep this computer on and connected. While it is off, circle")
-	fmt.Fprintln(w, "  members see only your LAST-SEEN location until it returns.")
-	fmt.Fprintln(w, "  Press Ctrl-C to stop.")
+	// Write errors are ignored throughout: this is a console status block, and a
+	// failing stdout is neither recoverable here nor worth failing startup over.
+	_, _ = fmt.Fprintln(w, "  Aul self-host is running.")
+	_, _ = fmt.Fprintln(w)
+	_, _ = fmt.Fprintf(w, "  Mode:       %s\n", modeLabel(info.res))
+	_, _ = fmt.Fprintf(w, "  Origin:     %s\n", info.res.Origin)
+	_, _ = fmt.Fprintf(w, "  Dashboard:  %s\n", info.res.Origin)
+	_, _ = fmt.Fprintf(w, "  Data dir:   %s\n", info.dataDir)
+	_, _ = fmt.Fprintf(w, "  Server log: %s\n", info.logPath)
+	_, _ = fmt.Fprintln(w)
+	_, _ = fmt.Fprintln(w, "  Keep this computer on and connected. While it is off, circle")
+	_, _ = fmt.Fprintln(w, "  members see only your LAST-SEEN location until it returns.")
+	_, _ = fmt.Fprintln(w, "  Press Ctrl-C to stop.")
 }
 
 // modeLabel renders (env, source) as human text for the status block.

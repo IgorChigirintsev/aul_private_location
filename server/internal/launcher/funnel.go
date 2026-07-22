@@ -174,6 +174,7 @@ func tsJSON(ctx context.Context, out any, args ...string) error {
 	defer cancel()
 
 	var stdout, stderr bytes.Buffer
+	// #nosec G204 -- fixed binary name, no shell; args come from our own call sites, never user input
 	cmd := exec.CommandContext(cctx, "tailscale", args...)
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr

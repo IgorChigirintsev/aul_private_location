@@ -19,6 +19,7 @@ func resolveDataDir(opts Options) (string, error) {
 		}
 		dir = filepath.Join(base, "aul")
 	}
+	// #nosec G703 -- the operator names their own data dir (--data-dir/AUL_DATA_DIR); that choice is the feature, not untrusted input
 	if err := os.MkdirAll(dir, 0o700); err != nil {
 		return "", fmt.Errorf("create data dir %s: %w", dir, err)
 	}
@@ -37,7 +38,7 @@ func resolveServerBin(opts Options) (string, error) {
 		}
 		bin = filepath.Join(filepath.Dir(exe), serverBinName())
 	}
-	info, err := os.Stat(bin)
+	info, err := os.Stat(bin) // #nosec G703 -- the operator names their own server binary (--server-bin/AUL_SERVER_BIN)
 	if err != nil {
 		return "", fmt.Errorf("server binary %s not found: %w (build it with 'go build ./cmd/aul', or set --server-bin / AUL_SERVER_BIN)", bin, err)
 	}

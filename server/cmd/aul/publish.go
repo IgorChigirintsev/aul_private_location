@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"math"
 	"os"
 	"regexp"
 	"strings"
@@ -61,7 +62,7 @@ func runPublishVersion(args []string) error {
 	if err != nil {
 		return fmt.Errorf("encode result: %w", err)
 	}
-	fmt.Fprintln(os.Stdout, string(out))
+	_, _ = fmt.Fprintln(os.Stdout, string(out))
 	return nil
 }
 
@@ -93,8 +94,11 @@ func parsePublishFlags(args []string) (store.UpsertAppVersionParams, error) {
 		return store.UpsertAppVersionParams{}, fmt.Errorf("--platform must be android or ios, got %q", *platform)
 	}
 
-	if *versionCode <= 0 {
-		return store.UpsertAppVersionParams{}, fmt.Errorf("--version-code is required and must be > 0, got %d", *versionCode)
+	// Upper bound as well as lower: the column is int32, and an unchecked cast of
+	// a larger flag value wraps silently — publishing a NEGATIVE version code that
+	// every client would then treat as older than what it already runs.
+	if *versionCode <= 0 || *versionCode > math.MaxInt32 {
+		return store.UpsertAppVersionParams{}, fmt.Errorf("--version-code is required and must be in 1..%d, got %d", math.MaxInt32, *versionCode)
 	}
 
 	name := strings.TrimSpace(*versionName)
@@ -102,8 +106,8 @@ func parsePublishFlags(args []string) (store.UpsertAppVersionParams, error) {
 		return store.UpsertAppVersionParams{}, fmt.Errorf("--version-name is required")
 	}
 
-	if *minSupported < 0 {
-		return store.UpsertAppVersionParams{}, fmt.Errorf("--min-supported must be >= 0, got %d", *minSupported)
+	if *minSupported < 0 || *minSupported > math.MaxInt32 {
+		return store.UpsertAppVersionParams{}, fmt.Errorf("--min-supported must be in 0..%d, got %d", math.MaxInt32, *minSupported)
 	}
 
 	sha := strings.ToLower(strings.TrimSpace(*sha256))
@@ -119,12 +123,12 @@ func parsePublishFlags(args []string) (store.UpsertAppVersionParams, error) {
 
 	params := store.UpsertAppVersionParams{
 		Platform:     *platform,
-		VersionCode:  int32(*versionCode),
+		VersionCode:  int32(*versionCode), // #nosec G115 -- bounded to 1..MaxInt32 by the check above
 		VersionName:  name,
 		ApkUrl:       optStr(url),
 		Sha256:       optStr(sha),
 		Changelog:    optStr(strings.TrimSpace(*changelog)),
-		MinSupported: int32(*minSupported),
+		MinSupported: int32(*minSupported), // #nosec G115 -- bounded to 0..MaxInt32 by the check above
 	}
 	return params, nil
 }

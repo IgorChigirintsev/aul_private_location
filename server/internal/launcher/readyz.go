@@ -46,7 +46,7 @@ func probeOnce(ctx context.Context, client *http.Client, target string) bool {
 	if err != nil {
 		return false
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	// Drain a little so the connection can be reused across polls.
 	_, _ = io.Copy(io.Discard, io.LimitReader(resp.Body, 512))
 	return resp.StatusCode == http.StatusOK

@@ -8,10 +8,10 @@ import "os"
 // Unix, opening the directory and calling Sync() issues that fsync; it is what
 // makes atomicWriteFile's rename survive power loss.
 func syncDir(dir string) error {
-	d, err := os.Open(dir)
+	d, err := os.Open(dir) // #nosec G304 -- our own data dir, opened only to fsync it
 	if err != nil {
 		return err
 	}
-	defer d.Close()
+	defer func() { _ = d.Close() }()
 	return d.Sync()
 }

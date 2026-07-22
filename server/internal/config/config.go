@@ -303,7 +303,7 @@ func loadFCM(c *Config, getenv func(string) string, fail func(string, ...any)) {
 		return // FCM disabled; nothing to validate.
 	}
 
-	raw, err := os.ReadFile(path)
+	raw, err := os.ReadFile(path) // #nosec G304 -- path IS the operator's own config value; reading it is the feature
 	if err != nil {
 		fail("FCM_SERVICE_ACCOUNT_FILE is set but cannot be read: %v "+
 			"(download it from Firebase console → Project settings → Service accounts)", err)

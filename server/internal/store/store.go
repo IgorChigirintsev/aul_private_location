@@ -107,7 +107,7 @@ func (s *Store) Ping(ctx context.Context) error {
 // it is the database/sql open-connection count.
 func (s *Store) TotalConns() int32 {
 	if s.backend == BackendSQLite {
-		return int32(s.sqldb.Stats().OpenConnections)
+		return int32(s.sqldb.Stats().OpenConnections) // #nosec G115 -- bounded by MaxOpenConns (single digits)
 	}
 	return s.pool.Stat().TotalConns()
 }

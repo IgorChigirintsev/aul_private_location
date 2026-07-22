@@ -26,7 +26,7 @@ const minPepperBytes = 16
 func provisionPepper(dataDir string) (string, error) {
 	path := filepath.Join(dataDir, "session_pepper")
 
-	raw, err := os.ReadFile(path)
+	raw, err := os.ReadFile(path) // #nosec G304 -- session_pepper inside our own data dir
 	switch {
 	case err == nil:
 		// Present: reuse exactly. TrimSpace only forgives a hand-added trailing

@@ -22,11 +22,13 @@ func runVAPIDKeys(out io.Writer) error {
 	if err != nil {
 		return fmt.Errorf("generate vapid keys: %w", err)
 	}
-	fmt.Fprintf(out, "# Web Push (VAPID) keypair — add to the server environment.\n")
-	fmt.Fprintf(out, "# Keep VAPID_PRIVATE_KEY secret; VAPID_PUBLIC_KEY is served to clients.\n")
-	fmt.Fprintf(out, "# Rotating the keypair invalidates every existing subscription.\n")
-	fmt.Fprintf(out, "VAPID_PUBLIC_KEY=%s\n", public)
-	fmt.Fprintf(out, "VAPID_PRIVATE_KEY=%s\n", private)
-	fmt.Fprintf(out, "VAPID_SUBJECT=mailto:ops@example.com\n")
+	// Write errors are ignored: this prints a keypair to stdout, and a failing
+	// stdout is not something the caller can act on.
+	_, _ = fmt.Fprintf(out, "# Web Push (VAPID) keypair — add to the server environment.\n")
+	_, _ = fmt.Fprintf(out, "# Keep VAPID_PRIVATE_KEY secret; VAPID_PUBLIC_KEY is served to clients.\n")
+	_, _ = fmt.Fprintf(out, "# Rotating the keypair invalidates every existing subscription.\n")
+	_, _ = fmt.Fprintf(out, "VAPID_PUBLIC_KEY=%s\n", public)
+	_, _ = fmt.Fprintf(out, "VAPID_PRIVATE_KEY=%s\n", private)
+	_, _ = fmt.Fprintf(out, "VAPID_SUBJECT=mailto:ops@example.com\n")
 	return nil
 }

@@ -31,7 +31,7 @@ func acquireLock(path string) (*lock, error) {
 	const attempts = 3
 	var lastErr error
 	for i := 0; i < attempts; i++ {
-		f, err := os.OpenFile(path, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0o600)
+		f, err := os.OpenFile(path, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0o600) // #nosec G304 -- lock file inside our own data dir
 		if err == nil {
 			if _, werr := f.WriteString(strconv.Itoa(os.Getpid())); werr != nil {
 				_ = f.Close()
@@ -73,7 +73,7 @@ func (l *lock) release() {
 // readPid parses the PID stored in a pidfile. A missing or garbage value returns
 // an error, which the caller treats as a stale (reclaimable) lock.
 func readPid(path string) (int, error) {
-	raw, err := os.ReadFile(path)
+	raw, err := os.ReadFile(path) // #nosec G304 -- pidfile inside our own data dir
 	if err != nil {
 		return 0, err
 	}

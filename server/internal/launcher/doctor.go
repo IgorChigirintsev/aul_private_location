@@ -87,21 +87,23 @@ func WriteReport(w io.Writer, r DoctorReport) {
 		if c.OK {
 			mark = "✓"
 		}
-		fmt.Fprintf(w, "%s %s — %s\n", mark, c.Name, c.Detail)
+		// Write errors are ignored throughout: this is a console report, and a
+		// failing stdout is neither recoverable here nor worth aborting the run.
+		_, _ = fmt.Fprintf(w, "%s %s — %s\n", mark, c.Name, c.Detail)
 		if !c.OK && c.Fix != "" {
 			for _, line := range strings.Split(c.Fix, "\n") {
-				fmt.Fprintf(w, "    %s\n", line)
+				_, _ = fmt.Fprintf(w, "    %s\n", line)
 			}
 		}
 	}
 	if r.Ready() {
-		fmt.Fprintf(w, "\nReady — your server is reachable at %s\n", r.Origin)
-		fmt.Fprintln(w, "Start it any time with:  aul-launcher")
+		_, _ = fmt.Fprintf(w, "\nReady — your server is reachable at %s\n", r.Origin)
+		_, _ = fmt.Fprintln(w, "Start it any time with:  aul-launcher")
 		return
 	}
-	fmt.Fprintln(w, "\nNot reachable yet. Do the step above, then re-run:  aul-launcher doctor")
-	fmt.Fprintln(w, "(You can still run `aul-launcher` now — it will serve on localhost only,")
-	fmt.Fprintln(w, " which is fine for trying it on this machine but not for remote members.)")
+	_, _ = fmt.Fprintln(w, "\nNot reachable yet. Do the step above, then re-run:  aul-launcher doctor")
+	_, _ = fmt.Fprintln(w, "(You can still run `aul-launcher` now — it will serve on localhost only,")
+	_, _ = fmt.Fprintln(w, " which is fine for trying it on this machine but not for remote members.)")
 }
 
 // installFix is the OS-appropriate "install Tailscale" instruction.

@@ -95,7 +95,13 @@ func New(ctx context.Context, credentialsJSON []byte, opts ...Option) (*Client, 
 	}
 	// Token refreshes go through the same bounded client as sends; without this
 	// they would use http.DefaultClient and could hang without a deadline.
-	creds, err := google.CredentialsFromJSON(
+	// The whole CredentialsFromJSON* family is marked deprecated over one risk:
+	// accepting a credential CONFIG from a source you do not control. That risk
+	// does not exist here — the JSON is the operator's own service-account file,
+	// named by FCM_SERVICE_ACCOUNT_FILE, and never comes from a request. The
+	// non-deprecated replacement lives in the separate cloud.google.com/go/auth
+	// module, which is not worth adding for this single call.
+	creds, err := google.CredentialsFromJSON( //nolint:staticcheck // SA1019: see above — the credential source is operator-owned, not untrusted
 		context.WithValue(ctx, oauth2.HTTPClient, c.hc), credentialsJSON, Scope)
 	if err != nil {
 		return nil, fmt.Errorf("fcm: service-account credentials are not usable: %w", err)
