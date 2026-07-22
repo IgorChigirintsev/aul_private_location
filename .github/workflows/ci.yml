@@ -62,11 +62,18 @@ jobs:
           version: v2.12.2
           working-directory: server
 
+      # Pinned rather than @latest, like sqlc and golangci-lint above: a gosec
+      # release can add RULES, and a new rule turns unrelated PRs red without a
+      # line of code changing (v2.28.0 introduced G703 and did exactly that).
+      # Bump this deliberately, then fix or justify whatever the new rules find.
       - name: gosec
         run: |
-          go install github.com/securego/gosec/v2/cmd/gosec@latest
+          go install github.com/securego/gosec/v2/cmd/gosec@v2.28.0
           gosec -quiet -exclude-generated ./...
 
+      # @latest on purpose here — unlike gosec. This one reports against a LIVE
+      # vulnerability database, so pinning the binary would not freeze what it
+      # finds; a newly disclosed CVE in a dependency should break the build.
       - name: govulncheck
         run: |
           go install golang.org/x/vuln/cmd/govulncheck@latest
