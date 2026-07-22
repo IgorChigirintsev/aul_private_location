@@ -1,0 +1,1367 @@
+{
+  "@@locale": "en",
+  "onboardingNotifTitle": "A visible, honest notification",
+  "@onboardingNotifTitle": {
+    "description": "Onboarding step 1 title — the notification-honesty step."
+  },
+  "onboardingNotifBody": "While you share, Aul always shows a notification — there is no hidden mode. You can pause any time. Allow notifications so you always know when sharing is on.",
+  "@onboardingNotifBody": {
+    "description": "Onboarding step 1 body explaining why notifications are requested."
+  },
+  "onboardingNotifCta": "Allow notifications",
+  "@onboardingNotifCta": {
+    "description": "Onboarding step 1 primary button."
+  },
+  "onboardingLocationTitle": "Location while using the app",
+  "@onboardingLocationTitle": {
+    "description": "Onboarding step 2 title — while-in-use location."
+  },
+  "onboardingLocationBody": "Aul needs your location to share it — encrypted — with your circle. Only your circle can decrypt it; the server sees ciphertext.",
+  "@onboardingLocationBody": {
+    "description": "Onboarding step 2 body."
+  },
+  "onboardingLocationCta": "Allow location",
+  "@onboardingLocationCta": {
+    "description": "Onboarding step 2 primary button."
+  },
+  "onboardingBackgroundTitle": "Keep sharing in your pocket",
+  "@onboardingBackgroundTitle": {
+    "description": "Onboarding step 3 title — background location."
+  },
+  "onboardingBackgroundBody": "To keep your family updated when the app is closed, choose “Allow all the time” on the next screen. You stay in control and can stop instantly.",
+  "@onboardingBackgroundBody": {
+    "description": "Onboarding step 3 body."
+  },
+  "onboardingBackgroundCta": "Allow in background",
+  "@onboardingBackgroundCta": {
+    "description": "Onboarding step 3 primary button."
+  },
+  "onboardingBatteryTitle": "Don’t let the system sleep sharing",
+  "@onboardingBatteryTitle": {
+    "description": "Onboarding step 4 title — battery optimization exclusion."
+  },
+  "onboardingBatteryBody": "Some phones aggressively stop background apps. Excluding Aul from battery optimization keeps location up to date (it still uses very little battery).",
+  "@onboardingBatteryBody": {
+    "description": "Onboarding step 4 body."
+  },
+  "onboardingBatteryCta": "Finish setup",
+  "@onboardingBatteryCta": {
+    "description": "Onboarding step 4 primary button that completes onboarding."
+  },
+  "onboardingSkip": "Skip for now",
+  "@onboardingSkip": {
+    "description": "Onboarding skip link shown under the primary button."
+  },
+  "appTagline": "Private family location, end-to-end encrypted. We never see where you are — check the code.",
+  "@appTagline": {
+    "description": "Marketing tagline shown under the app name on the login screen."
+  },
+  "loginCreateAccount": "Create account",
+  "@loginCreateAccount": {
+    "description": "Login segmented-button option and submit button for registering."
+  },
+  "loginSignIn": "Sign in",
+  "@loginSignIn": {
+    "description": "Login segmented-button option and submit button for signing in."
+  },
+  "loginServerLabel": "Server",
+  "@loginServerLabel": {
+    "description": "Text field label for the self-hosted server URL."
+  },
+  "loginServerHint": "https://your-aul-server",
+  "@loginServerHint": {
+    "description": "Placeholder example for the server URL field."
+  },
+  "loginEmailLabel": "Email",
+  "@loginEmailLabel": {
+    "description": "Text field label for the email address."
+  },
+  "loginPasswordLabel": "Password",
+  "@loginPasswordLabel": {
+    "description": "Text field label for the password."
+  },
+  "loginKeyReassurance": "Your location key never leaves your device. The server stores only ciphertext.",
+  "@loginKeyReassurance": {
+    "description": "Reassuring footnote under the login submit button."
+  },
+  "genericError": "Something went wrong",
+  "@genericError": {
+    "description": "Fallback error message when no specific error is available."
+  },
+  "whoCanSeeMe": "Who can see me",
+  "@whoCanSeeMe": {
+    "description": "Home app-bar tooltip and bottom-sheet title for the visibility summary."
+  },
+  "aboutTitle": "About & updates",
+  "@aboutTitle": {
+    "description": "Title of the About screen; also the Home menu item that opens it."
+  },
+  "debugTitle": "Battery & debug",
+  "@debugTitle": {
+    "description": "Title of the Debug screen; also the Home menu item that opens it."
+  },
+  "signOut": "Sign out",
+  "@signOut": {
+    "description": "Home menu item that signs the user out."
+  },
+  "homeSharingFooter": "Sharing always shows a notification. You can stop instantly.",
+  "@homeSharingFooter": {
+    "description": "Reassuring footer under the Home content."
+  },
+  "sosSentSuccess": "SOS sent — sharing live with your circles",
+  "@sosSentSuccess": {
+    "description": "Snackbar shown after an SOS is successfully raised."
+  },
+  "sosSentFailure": "Couldn’t send SOS (no circle key on this device)",
+  "@sosSentFailure": {
+    "description": "Snackbar shown when an SOS could not be sent."
+  },
+  "whoCanSeeMeNobody": "You are not sharing with anyone yet.",
+  "@whoCanSeeMeNobody": {
+    "description": "Visibility bottom-sheet body when the user is in no circles."
+  },
+  "whoCanSeeMeCircles": "Your encrypted location is shared with {count, plural, =1{1 circle} other{{count} circles}}. Only their members can decrypt it — the server cannot.",
+  "@whoCanSeeMeCircles": {
+    "description": "Visibility bottom-sheet body when sharing with one or more circles.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "joinCircleTitle": "Join a circle",
+  "@joinCircleTitle": {
+    "description": "Title of the join-by-link dialog."
+  },
+  "joinCircleHint": "Paste your invite link",
+  "@joinCircleHint": {
+    "description": "Placeholder in the invite-link text field."
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Generic cancel button."
+  },
+  "join": "Join",
+  "@join": {
+    "description": "Confirm button in the join-a-circle dialog."
+  },
+  "joinedCircle": "Joined circle",
+  "@joinedCircle": {
+    "description": "Snackbar shown after successfully joining a circle."
+  },
+  "couldNotJoin": "Could not join",
+  "@couldNotJoin": {
+    "description": "Snackbar shown when joining a circle failed."
+  },
+  "sharingOn": "Sharing your location",
+  "@sharingOn": {
+    "description": "Sharing card heading when sharing is active."
+  },
+  "sharingOff": "Not sharing",
+  "@sharingOff": {
+    "description": "Sharing card heading when sharing is off."
+  },
+  "precisionPrecise": "Precise",
+  "@precisionPrecise": {
+    "description": "Precision option: exact coordinates."
+  },
+  "precisionCity": "City",
+  "@precisionCity": {
+    "description": "Precision option: coarsened to city granularity."
+  },
+  "precisionPaused": "Paused",
+  "@precisionPaused": {
+    "description": "Precision option: not sharing / paused."
+  },
+  "stopSharing": "Stop sharing",
+  "@stopSharing": {
+    "description": "Button to stop sharing location."
+  },
+  "startSharing": "Start sharing",
+  "@startSharing": {
+    "description": "Button to start sharing location."
+  },
+  "joinCircleFirst": "Join a circle first to start sharing.",
+  "@joinCircleFirst": {
+    "description": "Hint shown when there is no circle to share with yet."
+  },
+  "sosActiveBanner": "SOS active — sharing live with your circles",
+  "@sosActiveBanner": {
+    "description": "Banner shown on Home while an SOS is active."
+  },
+  "errorRateLimited": "Too many attempts. Please wait a moment and try again.",
+  "errorAccountLocked": "Too many attempts — this account is temporarily locked. Try again later.",
+  "errorPayloadTooLarge": "That’s too large to send.",
+  "errorInternal": "Something went wrong on our end. Please try again.",
+  "errorTimeout": "The request timed out. Please try again.",
+  "errorForbidden": "You don’t have permission to do that.",
+  "sosInOtherCircle": "SOS in {names} — tap to open",
+  "@sosInOtherCircle": {
+    "description": "Red Home banner when a circle OTHER than the selected one has an active SOS. {names} is one or more circle names.",
+    "placeholders": {
+      "names": { "type": "String" }
+    }
+  },
+  "noCirclesYet": "No circles yet",
+  "@noCirclesYet": {
+    "description": "Circles card label when the user is in no circles."
+  },
+  "circlesCount": "{count, plural, =1{1 circle} other{{count} circles}}",
+  "@circlesCount": {
+    "description": "A count of circles, e.g. '1 circle' or '3 circles'.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "joinByLink": "Join by link",
+  "@joinByLink": {
+    "description": "Circles card button to join a circle via an invite link."
+  },
+  "sosSendTitle": "Send SOS?",
+  "@sosSendTitle": {
+    "description": "Title of the SOS confirmation dialog."
+  },
+  "sosSendBody": "This alerts everyone in your circles and starts live sharing until you resolve it.",
+  "@sosSendBody": {
+    "description": "Body of the SOS confirmation dialog."
+  },
+  "sosSend": "Send SOS",
+  "@sosSend": {
+    "description": "Confirm button that raises the SOS."
+  },
+  "sosHold": "Hold for SOS",
+  "@sosHold": {
+    "description": "Caption inside the round SOS button."
+  },
+  "sosSemantic": "SOS. Long press to send an emergency alert.",
+  "@sosSemantic": {
+    "description": "Accessibility label for the SOS button."
+  },
+  "aboutTagline": "Private family location, end-to-end encrypted.",
+  "@aboutTagline": {
+    "description": "Tagline on the About card."
+  },
+  "aboutVersionLabel": "Version",
+  "@aboutVersionLabel": {
+    "description": "Row label for the installed app version."
+  },
+  "aboutVersionValue": "{versionName} (build {versionCode})",
+  "@aboutVersionValue": {
+    "description": "Installed version, e.g. '1.0.0 (build 1)'.",
+    "placeholders": {
+      "versionName": {
+        "type": "String"
+      },
+      "versionCode": {
+        "type": "int"
+      }
+    }
+  },
+  "aboutVersionUnknown": "unknown",
+  "@aboutVersionUnknown": {
+    "description": "Shown when the installed version cannot be read."
+  },
+  "updatesManagedByStore": "Updates for this platform are managed by your app store.",
+  "@updatesManagedByStore": {
+    "description": "Shown when self-update is unavailable (e.g. iOS)."
+  },
+  "updateUpToDate": "You are on the latest version.",
+  "@updateUpToDate": {
+    "description": "Status line after a manual check finds no newer version."
+  },
+  "updateCheckError": "Could not check for updates.",
+  "@updateCheckError": {
+    "description": "Fallback status line when an update check errored."
+  },
+  "updateCheckPrompt": "Check whether a newer build is available.",
+  "@updateCheckPrompt": {
+    "description": "Default prompt on the update-check card."
+  },
+  "updateCheckButton": "Check for updates",
+  "@updateCheckButton": {
+    "description": "Button that manually checks for updates."
+  },
+  "locationExtras": "Location extras",
+  "@locationExtras": {
+    "description": "Heading of the optional retention-features section."
+  },
+  "locationExtrasSubtitle": "Optional, private, and off by default. Everything here is computed on your device — the server never sees more.",
+  "@locationExtrasSubtitle": {
+    "description": "Subtitle of the retention-features section."
+  },
+  "serverDisabledFeatures": "Your server has turned these features off.",
+  "@serverDisabledFeatures": {
+    "description": "Note shown when the server kill-switch disables the retention features."
+  },
+  "arrivalAlertsTitle": "Arrival alerts",
+  "@arrivalAlertsTitle": {
+    "description": "Toggle title for arrival/left notifications."
+  },
+  "arrivalAlertsSubtitle": "Notify me when I arrive at or leave a saved place.",
+  "@arrivalAlertsSubtitle": {
+    "description": "Toggle subtitle for arrival alerts."
+  },
+  "trackingRemindersTitle": "Tracking reminders",
+  "@trackingRemindersTitle": {
+    "description": "Toggle title for re-engagement reminders."
+  },
+  "trackingRemindersSubtitle": "Remind me if sharing stops or battery is low.",
+  "@trackingRemindersSubtitle": {
+    "description": "Toggle subtitle for tracking reminders."
+  },
+  "themeLabel": "Theme",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "language": "Language",
+  "@language": {
+    "description": "Heading of the language-picker section in About."
+  },
+  "languageSystem": "System",
+  "@languageSystem": {
+    "description": "Language option that follows the device language."
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "Language option for English (shown in its own endonym)."
+  },
+  "languageRussian": "Русский",
+  "@languageRussian": {
+    "description": "Language option for Russian (shown in its own endonym; do not translate)."
+  },
+  "debugSharing": "Sharing",
+  "@debugSharing": {
+    "description": "Debug row label for the sharing on/off state."
+  },
+  "debugOn": "On",
+  "@debugOn": {
+    "description": "Debug value: a feature is on."
+  },
+  "debugOff": "Off",
+  "@debugOff": {
+    "description": "Debug value: a feature is off."
+  },
+  "debugPrecision": "Precision",
+  "@debugPrecision": {
+    "description": "Debug row label for the current precision mode."
+  },
+  "debugCircles": "Circles",
+  "@debugCircles": {
+    "description": "Debug row label for the number of circles."
+  },
+  "debugQueuedPings": "Queued (unsent) pings",
+  "@debugQueuedPings": {
+    "description": "Debug row label for the offline queue depth."
+  },
+  "debugServer": "Server",
+  "@debugServer": {
+    "description": "Debug row label for the signed-in server URL."
+  },
+  "debugCadenceInfo": "Adaptive cadence keeps battery low: still → 10 min, walking → 60 s, driving → 15 s, live/SOS → 5 s. Pings are batched and retried with backoff. Target: ≤ 3 % battery per day.",
+  "@debugCadenceInfo": {
+    "description": "Explanatory card about the adaptive reporting cadence and battery target."
+  },
+  "updateProblem": "Update problem",
+  "@updateProblem": {
+    "description": "Update card heading when an update failed."
+  },
+  "updateAvailable": "Update available",
+  "@updateAvailable": {
+    "description": "Update card heading when a newer version is available."
+  },
+  "updateGenericError": "Something went wrong.",
+  "@updateGenericError": {
+    "description": "Fallback error text in the update card."
+  },
+  "updateReadyToInstall": "Aul {versionName} is ready to install.",
+  "@updateReadyToInstall": {
+    "description": "Update card line naming the version ready to install.",
+    "placeholders": {
+      "versionName": {
+        "type": "String"
+      }
+    }
+  },
+  "updateDownloading": "Downloading & verifying…",
+  "@updateDownloading": {
+    "description": "Update card status while the APK downloads and is verified."
+  },
+  "updateInstalling": "Starting installer…",
+  "@updateInstalling": {
+    "description": "Update card status while handing off to the system installer."
+  },
+  "later": "Later",
+  "@later": {
+    "description": "Dismiss button on the update card."
+  },
+  "tryAgain": "Try again",
+  "@tryAgain": {
+    "description": "Retry button on the update card after an error."
+  },
+  "updateNow": "Update now",
+  "@updateNow": {
+    "description": "Primary button to start the update."
+  },
+  "updateCheckFailedRetry": "Could not check for updates. Please try again.",
+  "@updateCheckFailedRetry": {
+    "description": "Error after a failed manual update check."
+  },
+  "updateNeedInstallPermission": "Allow \"install unknown apps\" for Aul to update.",
+  "@updateNeedInstallPermission": {
+    "description": "Error when the install-unknown-apps permission is missing."
+  },
+  "updateIntegrityFailed": "Update aborted: integrity check failed.",
+  "@updateIntegrityFailed": {
+    "description": "Error when the downloaded APK failed its SHA-256 check."
+  },
+  "updateDownloadFailed": "Download failed. Please try again.",
+  "@updateDownloadFailed": {
+    "description": "Error when the update download failed."
+  },
+  "pushAlertsTitle": "Notifications while Aul is closed",
+  "@pushAlertsTitle": {
+    "description": "Title of the switch opting this device into background push (FCM)."
+  },
+  "pushAlertsSubtitle": "Let your circle's notifications reach this device in the background. They are decrypted on your phone — the server only relays them, and cannot read them.",
+  "@pushAlertsSubtitle": {
+    "description": "Subtitle of the background push switch, stating the E2EE property."
+  },
+  "notifChannelName": "Aul reminders",
+  "@notifChannelName": {
+    "description": "Android notification channel name shown in system settings."
+  },
+  "notifChannelDescription": "Arrival alerts, tracking reminders, and your weekly summary.",
+  "@notifChannelDescription": {
+    "description": "Android notification channel description shown in system settings."
+  },
+  "notifArrivedTitle": "Arrived",
+  "@notifArrivedTitle": {
+    "description": "Notification title when the user enters a saved place."
+  },
+  "notifLeftTitle": "Left",
+  "@notifLeftTitle": {
+    "description": "Notification title when the user leaves a saved place."
+  },
+  "notifArrivedBody": "You arrived at {place}",
+  "@notifArrivedBody": {
+    "description": "Notification body when the user enters a saved place.",
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "notifLeftBody": "You left {place}",
+  "@notifLeftBody": {
+    "description": "Notification body when the user leaves a saved place.",
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "notifCircleUpdateTitle": "Circle update",
+  "@notifCircleUpdateTitle": {
+    "description": "Notification title for a circle member's arrival."
+  },
+  "notifMemberArrivedBody": "{name} arrived at {place}",
+  "@notifMemberArrivedBody": {
+    "description": "Notification body when a circle member arrives at a shared place.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "notifMemberLeftBody": "{name} left {place}",
+  "@notifMemberLeftBody": {
+    "description": "Notification body when a circle member leaves a shared place.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "notifSharingOffTitle": "Sharing is off",
+  "@notifSharingOffTitle": {
+    "description": "Reminder notification title when sharing has stopped unexpectedly."
+  },
+  "notifSharingOffBody": "Location sharing has stopped. Open Aul to resume.",
+  "@notifSharingOffBody": {
+    "description": "Reminder notification body when sharing has stopped."
+  },
+  "notifBatteryLowTitle": "Battery low",
+  "@notifBatteryLowTitle": {
+    "description": "Reminder notification title when the battery is low."
+  },
+  "notifBatteryLowBody": "Low battery may be affecting location sharing.",
+  "@notifBatteryLowBody": {
+    "description": "Reminder notification body when the battery is low."
+  },
+  "sharingNotification": "Sharing with {label} · {precision}",
+  "@sharingNotification": {
+    "description": "Persistent foreground-service notification text while sharing normally.",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "precision": {
+        "type": "String"
+      }
+    }
+  },
+  "sosNotification": "SOS active · sharing live with {label}",
+  "@sosNotification": {
+    "description": "Persistent foreground-service notification text during an SOS.",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteInvalid": "Not a valid invite link",
+  "@inviteInvalid": {
+    "description": "Error when a pasted invite link cannot be parsed."
+  },
+  "inviteMissingKey": "Invite link is missing the circle key",
+  "@inviteMissingKey": {
+    "description": "Error when the invite link has no circle key fragment."
+  },
+  "inviteMalformed": "Invite key is malformed",
+  "@inviteMalformed": {
+    "description": "Error when the invite key is the wrong length/format."
+  },
+  "inviteTitle": "Invite to your circle",
+  "@inviteTitle": {
+    "description": "Title of the invite action and of the invite-link dialog."
+  },
+  "inviteSubtitle": "Share a link that lets someone join",
+  "@inviteSubtitle": {
+    "description": "Subtitle of the Invite item on the circle switcher sheet."
+  },
+  "inviteCreating": "Creating invite…",
+  "@inviteCreating": {
+    "description": "Shown in the invite dialog while the invite is being created."
+  },
+  "inviteError": "Could not create an invite",
+  "@inviteError": {
+    "description": "Shown in the invite dialog when the invite could not be created (offline, refused, or no circle key on this device)."
+  },
+  "inviteNote": "This link contains your circle key in the part after “#”, which the server never receives. Anyone with the whole link can join this circle — share it only with family.",
+  "@inviteNote": {
+    "description": "Honest explanation under the invite link: the key rides in the fragment, and whoever holds the whole link can join."
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Dismisses a dialog."
+  },
+  "circleFallback": "Your circle",
+  "@circleFallback": {
+    "description": "Generic circle name shown when a circle has no decrypted name."
+  },
+  "circlesYours": "Your circles",
+  "@circlesYours": {
+    "description": "Header of the circle-switcher list of the user's circles."
+  },
+  "circleOwnerBadge": "owner",
+  "@circleOwnerBadge": {
+    "description": "Small badge marking a circle (or member) the user owns."
+  },
+  "circleRoleMember": "member",
+  "@circleRoleMember": {
+    "description": "Role badge for a non-owner circle member."
+  },
+  "switchCircle": "Switch circle",
+  "@switchCircle": {
+    "description": "Tooltip/label for the app-bar circle switcher control."
+  },
+  "renameCircle": "Rename circle",
+  "@renameCircle": {
+    "description": "Circle-switcher action (owner) that renames the selected circle."
+  },
+  "renameCircleHint": "New circle name",
+  "@renameCircleHint": {
+    "description": "Text-field hint in the rename-circle dialog."
+  },
+  "rename": "Rename",
+  "@rename": {
+    "description": "Confirm button in the rename-circle dialog."
+  },
+  "leaveCircle": "Leave circle",
+  "@leaveCircle": {
+    "description": "Circle-switcher action that leaves the selected circle."
+  },
+  "leaveCircleTitle": "Leave circle?",
+  "@leaveCircleTitle": {
+    "description": "Title of the leave-circle confirmation dialog."
+  },
+  "leaveCircleBody": "Leave this circle? You’ll stop sharing your location with it and stop seeing its members.",
+  "@leaveCircleBody": {
+    "description": "Body of the leave-circle confirmation dialog."
+  },
+  "leave": "Leave",
+  "@leave": {
+    "description": "Confirm button in the leave-circle dialog."
+  },
+  "soleOwnerTitle": "Delete this circle?",
+  "@soleOwnerTitle": {
+    "description": "Title shown when a sole owner tries to leave and must delete instead."
+  },
+  "soleOwnerBody": "You’re the only owner, so you can’t just leave. Delete this circle for everyone instead?",
+  "@soleOwnerBody": {
+    "description": "Body shown when a sole owner tries to leave and must delete instead."
+  },
+  "deleteCircle": "Delete circle",
+  "@deleteCircle": {
+    "description": "Circle-switcher action (owner) that permanently deletes the circle."
+  },
+  "deleteCircleTitle": "Delete circle?",
+  "@deleteCircleTitle": {
+    "description": "Title of the delete-circle confirmation dialog."
+  },
+  "deleteCircleBody": "Delete “{name}” for everyone? This permanently removes the circle and all its data. This cannot be undone.",
+  "@deleteCircleBody": {
+    "description": "Body of the delete-circle confirmation dialog, naming the circle.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Confirm button in the delete-circle dialog."
+  },
+  "createCircle": "New circle",
+  "@createCircle": {
+    "description": "Circle-switcher action that creates a new circle."
+  },
+  "createCircleHint": "Name your circle",
+  "@createCircleHint": {
+    "description": "Text-field hint in the create-circle dialog."
+  },
+  "create": "Create",
+  "@create": {
+    "description": "Confirm button in the create-circle dialog."
+  },
+  "circleRenamed": "Circle renamed",
+  "@circleRenamed": {
+    "description": "Snackbar after a circle is renamed."
+  },
+  "circleLeft": "You left the circle",
+  "@circleLeft": {
+    "description": "Snackbar after leaving a circle."
+  },
+  "circleDeleted": "Circle deleted",
+  "@circleDeleted": {
+    "description": "Snackbar after a circle is deleted."
+  },
+  "circleCreated": "Circle created",
+  "@circleCreated": {
+    "description": "Snackbar after a new circle is created."
+  },
+  "circleActionFailed": "Something went wrong. Please try again.",
+  "@circleActionFailed": {
+    "description": "Snackbar when a circle-management action fails."
+  },
+  "membersTitle": "People",
+  "@membersTitle": {
+    "description": "Title of the members screen and its entry-point button."
+  },
+  "membersEmpty": "No one here yet. Invite your family with a link.",
+  "@membersEmpty": {
+    "description": "Empty state on the members screen."
+  },
+  "membersError": "Couldn’t load members. Pull to try again.",
+  "@membersError": {
+    "description": "Error state on the members screen when loading fails."
+  },
+  "profileYou": "(you)",
+  "@profileYou": {
+    "description": "Suffix marking the current user in the members list."
+  },
+  "verifyDevicesTitle": "Verify devices",
+  "@verifyDevicesTitle": {
+    "description": "Title of the device-verification screen and its entry-point button/menu item."
+  },
+  "verifyDevicesIntro": "Compare these codes out loud with each person. If they match on both phones, no one has swapped your encryption keys. The server never sees the codes.",
+  "@verifyDevicesIntro": {
+    "description": "Explanation at the top of the verify-devices screen: read the safety codes aloud out of band to detect a man-in-the-middle."
+  },
+  "verifyDevicesEmpty": "No other devices to verify yet. They appear here once someone else joins this circle.",
+  "@verifyDevicesEmpty": {
+    "description": "Empty state on the verify-devices screen when there are no other devices to compare against."
+  },
+  "verifyDevicesError": "Couldn’t load devices. Pull to try again.",
+  "@verifyDevicesError": {
+    "description": "Error state on the verify-devices screen when loading fails (e.g. offline, or no identity key on this device)."
+  },
+  "rotateKey": "Rotate circle key",
+  "@rotateKey": {
+    "description": "Owner-only menu item that re-keys the circle."
+  },
+  "rotateKeyTitle": "Rotate circle key?",
+  "@rotateKeyTitle": {
+    "description": "Title of the confirm dialog before rotating the circle key."
+  },
+  "rotateKeyBody": "This creates a new encryption key for the circle. New locations, places and alerts use the new key, and it is sent — sealed — to every member’s device. Existing data stays readable. Do this if you think the old key may have leaked.",
+  "@rotateKeyBody": {
+    "description": "Body of the confirm dialog explaining what rotating the circle key does."
+  },
+  "rotateKeyConfirm": "Rotate key",
+  "@rotateKeyConfirm": {
+    "description": "Confirm button that performs the circle key rotation."
+  },
+  "rotateKeySuccess": "Circle key rotated",
+  "@rotateKeySuccess": {
+    "description": "Snackbar after the circle key is successfully rotated and distributed."
+  },
+  "rotateKeyFailure": "Couldn’t rotate the key. Please try again.",
+  "@rotateKeyFailure": {
+    "description": "Snackbar when rotating the circle key fails (offline, or no key held on this device)."
+  },
+  "editProfile": "Edit profile",
+  "@editProfile": {
+    "description": "Entry-point button/title for editing the per-circle profile."
+  },
+  "profileTitle": "Your profile in this circle",
+  "@profileTitle": {
+    "description": "Heading on the profile editor screen."
+  },
+  "profileNickname": "Nickname",
+  "@profileNickname": {
+    "description": "Label for the nickname field in the profile editor."
+  },
+  "profileNicknameHint": "How you appear to this circle",
+  "@profileNicknameHint": {
+    "description": "Hint for the nickname field in the profile editor."
+  },
+  "profilePhoto": "Photo",
+  "@profilePhoto": {
+    "description": "Label for the avatar section in the profile editor."
+  },
+  "profileChoosePhoto": "Choose photo",
+  "@profileChoosePhoto": {
+    "description": "Button to pick an avatar photo from the gallery."
+  },
+  "profileChangePhoto": "Change photo",
+  "@profileChangePhoto": {
+    "description": "Button to replace an already-chosen avatar photo."
+  },
+  "profileRemovePhoto": "Remove photo",
+  "@profileRemovePhoto": {
+    "description": "Button to remove the avatar photo."
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button in the profile editor."
+  },
+  "profileSaved": "Profile saved",
+  "@profileSaved": {
+    "description": "Snackbar after the profile is saved."
+  },
+  "profileTooLarge": "That image is too large. Try a smaller crop.",
+  "@profileTooLarge": {
+    "description": "Error when the sealed profile would exceed the size limit."
+  },
+  "profileImageError": "Couldn’t read that image. Try another.",
+  "@profileImageError": {
+    "description": "Error when a chosen image can't be read/processed."
+  },
+  "profileSaveError": "Couldn’t save your profile. Try again.",
+  "@profileSaveError": {
+    "description": "Error when saving the profile fails."
+  },
+  "cropTitle": "Crop photo",
+  "@cropTitle": {
+    "description": "Title of the avatar cropping screen."
+  },
+  "done": "Done",
+  "@done": {
+    "description": "Confirm button on the avatar cropping screen."
+  },
+  "mapTitle": "Map",
+  "@mapTitle": {
+    "description": "Title of the live map screen and the Home entry that opens it."
+  },
+  "mapRecenter": "Recenter",
+  "@mapRecenter": {
+    "description": "Map app-bar action that refits the camera to all members."
+  },
+  "mapNorthUp": "Reset north",
+  "@mapNorthUp": {
+    "description": "Tooltip / accessibility label for the on-map control that rotates the camera back to north-up (resets bearing and pitch to 0)."
+  },
+  "mapRecenterOnMe": "Center on me",
+  "@mapRecenterOnMe": {
+    "description": "Tooltip / accessibility label for the on-map control that flies the camera to the current user's own latest shared position."
+  },
+  "mapEmpty": "No one to show yet. When your circle shares their location, they’ll appear on the map.",
+  "@mapEmpty": {
+    "description": "Map empty state shown over the basemap when no positions decode."
+  },
+  "mapTagPc": "PC",
+  "@mapTagPc": {
+    "description": "Marker tag for a web (computer) device on the map."
+  },
+  "mapTagPhone": "Phone",
+  "@mapTagPhone": {
+    "description": "Marker tag for a phone (android/ios) device on the map."
+  },
+  "placesTitle": "Places",
+  "@placesTitle": {
+    "description": "Title of the places manager sheet and its map action."
+  },
+  "geofenceFeedTitle": "At places",
+  "@geofenceFeedTitle": {
+    "description": "Title of the geofence feed sheet: who is inside a place right now."
+  },
+  "geofenceAtPlacesCount": "{count, plural, =0{Nobody at a place} =1{1 person at a place} other{{count} people at places}}",
+  "@geofenceAtPlacesCount": {
+    "description": "Collapsed geofence feed pill: how many member devices are inside a place right now.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "geofenceNobody": "Nobody is inside a place right now.",
+  "@geofenceNobody": {
+    "description": "Geofence feed empty state for the presence section."
+  },
+  "geofencePresenceRow": "{name} is at {place}",
+  "@geofencePresenceRow": {
+    "description": "One presence row: a member is currently inside a place.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "geofenceRecent": "Recent",
+  "@geofenceRecent": {
+    "description": "Section header above the recent arrive/depart events."
+  },
+  "geofenceEventEnter": "{name} arrived at {place}",
+  "@geofenceEventEnter": {
+    "description": "A recent geofence enter event.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "geofenceEventExit": "{name} left {place}",
+  "@geofenceEventExit": {
+    "description": "A recent geofence exit event.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "geofenceOnTheWay": "On the way",
+  "@geofenceOnTheWay": {
+    "description": "Section header above the rough ETA rows for members moving toward a place."
+  },
+  "geofenceEtaRow": "{name} → {place}",
+  "@geofenceEtaRow": {
+    "description": "One 'on the way' row: a moving member and the place they are heading toward.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "geofenceEtaLessMin": "<1 min",
+  "@geofenceEtaLessMin": {
+    "description": "Rough ETA under a minute."
+  },
+  "geofenceEtaMin": "{count, plural, =1{1 min} other{{count} min}}",
+  "@geofenceEtaMin": {
+    "description": "Rough ETA in whole minutes.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "geofenceEtaHourMin": "{h} h {rem} min",
+  "@geofenceEtaHourMin": {
+    "description": "Rough ETA of an hour or more, with remaining minutes.",
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "rem": {
+        "type": "int"
+      }
+    }
+  },
+  "geofenceEtaHour": "{h} h",
+  "@geofenceEtaHour": {
+    "description": "Rough ETA of a whole number of hours.",
+    "placeholders": {
+      "h": {
+        "type": "int"
+      }
+    }
+  },
+  "membersAccuracy": "±{value} {unit}",
+  "@membersAccuracy": {
+    "description": "A member's reported location uncertainty, e.g. '±40 m' or '±1.2 km'.",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "unitMeters": "m",
+  "@unitMeters": {
+    "description": "Distance unit abbreviation: metres."
+  },
+  "unitKilometers": "km",
+  "@unitKilometers": {
+    "description": "Distance unit abbreviation: kilometres."
+  },
+  "placesAddAPlace": "Add a place",
+  "@placesAddAPlace": {
+    "description": "Button that starts adding a new place."
+  },
+  "placesNameHint": "Place name (e.g. Home)",
+  "@placesNameHint": {
+    "description": "Placeholder in the place-name text field."
+  },
+  "placesRadiusLabel": "Geofence radius",
+  "@placesRadiusLabel": {
+    "description": "Label above the geofence-radius slider."
+  },
+  "placesRadiusValue": "{meters} m",
+  "@placesRadiusValue": {
+    "description": "A geofence radius in metres, e.g. '150 m'.",
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "placesTapMap": "Tap the map to set the centre.",
+  "@placesTapMap": {
+    "description": "Hint shown in the editor before a centre is picked."
+  },
+  "placesCentreSet": "Centre set. Adjust the radius, then save.",
+  "@placesCentreSet": {
+    "description": "Hint shown in the editor once the centre is picked."
+  },
+  "placesAddPlace": "Add place",
+  "@placesAddPlace": {
+    "description": "Save button when creating a new place."
+  },
+  "placesSaveChanges": "Save changes",
+  "@placesSaveChanges": {
+    "description": "Save button when editing an existing place."
+  },
+  "placesEmpty": "No places yet. Add Home, Work, School…",
+  "@placesEmpty": {
+    "description": "Empty state in the places list."
+  },
+  "placesConfirmDelete": "Delete place “{name}”?",
+  "@placesConfirmDelete": {
+    "description": "Confirmation before deleting a place.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "placesSaveFailed": "Couldn’t save place. Please try again.",
+  "@placesSaveFailed": {
+    "description": "Snackbar when saving a place fails (e.g. a version clash)."
+  },
+  "sosCenterTitle": "SOS",
+  "@sosCenterTitle": {
+    "description": "Heading of an active SOS alert banner in the SOS centre."
+  },
+  "sosCenterNoMessage": "Emergency alert",
+  "@sosCenterNoMessage": {
+    "description": "SOS banner text when the alert decrypted but carried no message."
+  },
+  "sosCenterEncrypted": "SOS raised — can’t decrypt on this device",
+  "@sosCenterEncrypted": {
+    "description": "SOS banner text when the payload can't be decrypted (still surfaced so no emergency is missed)."
+  },
+  "sosCenterResolve": "Resolve",
+  "@sosCenterResolve": {
+    "description": "Button that resolves (clears) an active SOS alert for the circle."
+  },
+  "membersRemove": "Remove from circle",
+  "@membersRemove": {
+    "description": "Tooltip on the owner-only remove-member button"
+  },
+  "membersRemoveTitle": "Remove member?",
+  "@membersRemoveTitle": {
+    "description": "Confirm dialog title for removing a member"
+  },
+  "membersRemoveAction": "Remove",
+  "@membersRemoveAction": {
+    "description": "Confirm button label for removing a member"
+  },
+  "membersRemoveConfirm": "Remove {name} from this circle? They stop seeing everyone, and stop sharing with you.",
+  "@membersRemoveConfirm": {
+    "description": "Confirm body for removing a member",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "membersRemoveFailed": "Couldn’t remove them. Please try again.",
+  "@membersRemoveFailed": {
+    "description": "Snackbar when removing a member fails"
+  },
+  "membersRotateAfterRemove": "They still hold the old circle key, so they could read data sent from now on. Rotate the circle key?",
+  "@membersRotateAfterRemove": {
+    "description": "Offered right after removing a member: removal alone does not revoke K_c"
+  },
+  "shareTitle": "Live share link",
+  "@shareTitle": {
+    "description": "Title of the live-share sheet: a link that shows your live location to one outsider."
+  },
+  "shareHomeHint": "Show where you are to one person, without an account — for as long as you choose.",
+  "@shareHomeHint": {
+    "description": "One-line hint under the share action on the home screen."
+  },
+  "shareIntro": "Creates a link that shows your live location to one person — no account needed. Whoever opens it first keeps it; nobody else can. It stops at the deadline, or the moment you revoke it.",
+  "@shareIntro": {
+    "description": "Honest explanation of what a live-share link does, shown at the top of the sheet."
+  },
+  "shareDuration": "How long",
+  "@shareDuration": {
+    "description": "Label above the share duration choices."
+  },
+  "shareCreate": "Create link",
+  "@shareCreate": {
+    "description": "Button that creates a live-share link."
+  },
+  "shareCreating": "Creating…",
+  "@shareCreating": {
+    "description": "Busy label on the create-link button."
+  },
+  "shareError": "Could not create a share link",
+  "@shareError": {
+    "description": "Error shown when creating a share link failed."
+  },
+  "shareLinkTitle": "Your share link",
+  "@shareLinkTitle": {
+    "description": "Title above the freshly created link."
+  },
+  "shareNote": "The key that decrypts your position is the part after #, which the server never receives. Anyone holding the whole link can watch you until it ends.",
+  "@shareNote": {
+    "description": "Explains that the link fragment is the decryption key."
+  },
+  "shareActive": "Active links",
+  "@shareActive": {
+    "description": "Header of the list of running share links."
+  },
+  "shareNone": "No active share links.",
+  "@shareNone": {
+    "description": "Shown when there are no running share links."
+  },
+  "shareClaimed": "Open — a viewer has this link",
+  "@shareClaimed": {
+    "description": "A share session that a viewer has already opened."
+  },
+  "shareUnclaimed": "Not opened yet — the first device to open it keeps it",
+  "@shareUnclaimed": {
+    "description": "A share session nobody has opened yet."
+  },
+  "shareNoKeyHere": "Made on another device: its link can’t be shown here, but you can still revoke it.",
+  "@shareNoKeyHere": {
+    "description": "A share session whose K_share is not on this device."
+  },
+  "shareRevoke": "Revoke",
+  "@shareRevoke": {
+    "description": "Button that kills a share link now."
+  },
+  "shareRevokeConfirm": "Revoke this link? Whoever is watching stops seeing you immediately.",
+  "@shareRevokeConfirm": {
+    "description": "Confirmation before revoking a share link."
+  },
+  "shareBannerSharing": "Sharing your live location",
+  "@shareBannerSharing": {
+    "description": "Home banner shown while exactly one live share is running."
+  },
+  "shareNotification": "Sharing your live location via a link",
+  "@shareNotification": {
+    "description": "Foreground-service notification text while only a live share (no circle) is running."
+  },
+  "copy": "Copy",
+  "@copy": {
+    "description": "Button that copies a link to the clipboard."
+  },
+  "copied": "Copied",
+  "@copied": {
+    "description": "Confirmation that a link was copied to the clipboard."
+  },
+  "sosHoldHint": "Hold the SOS button to send an alert.",
+  "@sosHoldHint": {
+    "description": "Snackbar shown when the SOS button is tapped instead of held."
+  },
+  "sosNoKeyHint": "No circle key on this device — an SOS can’t be sealed for anyone yet.",
+  "@sosNoKeyHint": {
+    "description": "Snackbar/tooltip explaining why the SOS button is disabled."
+  },
+  "shareMinutes": "{minutes} min",
+  "@shareMinutes": {
+    "description": "A share duration in minutes.",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "shareEndsIn": "Ends in {countdown}",
+  "@shareEndsIn": {
+    "description": "Countdown until a share link expires, e.g. \"Ends in 09:07\".",
+    "placeholders": {
+      "countdown": {
+        "type": "String"
+      }
+    }
+  },
+  "shareBannerSharingMany": "Sharing your live location · {count, plural, =1{1 link} other{{count} links}}",
+  "@shareBannerSharingMany": {
+    "description": "Home banner while more than one live share is running.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "circlesDashTitle": "My circles",
+  "@circlesDashTitle": {
+    "description": "Title of the circles dashboard screen listing every circle you are in."
+  },
+  "circlesDashSubtitle": "Every circle you're in, and what you give each one.",
+  "@circlesDashSubtitle": {
+    "description": "Subtitle under the circles dashboard title."
+  },
+  "circlesDashEmpty": "You're not in any circle yet.",
+  "@circlesDashEmpty": {
+    "description": "Empty state of the circles dashboard."
+  },
+  "circlesDashYouAs": "You as {nick}",
+  "@circlesDashYouAs": {
+    "description": "Secondary line on a dashboard row showing your nickname in that circle.",
+    "placeholders": {
+      "nick": {
+        "type": "String"
+      }
+    }
+  },
+  "circlesDashYouNoNick": "You (no nickname set here)",
+  "@circlesDashYouNoNick": {
+    "description": "Secondary line on a dashboard row when you set no nickname in that circle."
+  },
+  "circlesDashNotificationsTitle": "Notifications",
+  "@circlesDashNotificationsTitle": {
+    "description": "Switch label: whether this circle's members can notify you."
+  },
+  "circlesDashNotificationsOn": "This circle's members can send you notifications.",
+  "@circlesDashNotificationsOn": {
+    "description": "Description under the notifications switch when it is on."
+  },
+  "circlesDashNotificationsOff": "Muted \u2014 notifications from this circle's members don't reach you.",
+  "@circlesDashNotificationsOff": {
+    "description": "Description under the notifications switch when muted. States plainly that the server stops the notifications reaching you, rather than hiding them locally."
+  },
+  "circlesDashActionFailed": "Couldn't save that change.",
+  "@circlesDashActionFailed": {
+    "description": "Snackbar when a dashboard switch could not be written to the server."
+  },
+  "membersMute": "Mute {name} \u2014 stop their notifications reaching you",
+  "@membersMute": {
+    "description": "Tooltip on the bell toggle of an unmuted member.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "membersUnmute": "Unmute {name} \u2014 let their notifications reach you again",
+  "@membersUnmute": {
+    "description": "Tooltip on the bell-off toggle of a muted member.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "membersMuteFailed": "Couldn't change that mute.",
+  "@membersMuteFailed": {
+    "description": "Snackbar when writing the mute set failed."
+  },
+  "placesAddedBy": "Added by {name}",
+  "@placesAddedBy": {
+    "description": "Secondary line under a place name naming the member who created it.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "agoJustNow": "just now",
+  "@agoJustNow": {
+    "description": "Relative time for a position updated less than a minute ago."
+  },
+  "agoMinutes": "{count, plural, =1{1 min ago} other{{count} min ago}}",
+  "@agoMinutes": {
+    "description": "Relative time for a position updated a number of minutes ago.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "agoHours": "{count, plural, =1{1 h ago} other{{count} h ago}}",
+  "@agoHours": {
+    "description": "Relative time for a position updated a number of hours ago.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "batteryPercent": "{pct}%",
+  "@batteryPercent": {
+    "description": "A member's battery level. Digits and a percent sign — no words to translate.",
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "batteryLabel": "Battery",
+  "@batteryLabel": {
+    "description": "Accessibility label naming what the battery percentage on a member's row is."
+  },
+  "membersNoPosition": "No location yet",
+  "@membersNoPosition": {
+    "description": "Shown on a member's row when no decrypted position of theirs exists yet."
+  },
+  "staleBadge": "Stale",
+  "@staleBadge": {
+    "description": "Badge on a member's row and a dimmed map marker whose latest position is older than the freshness threshold, so a last-known dot is never read as current."
+  },
+  "liveUpdatesPaused": "Live updates paused — reconnecting…",
+  "@liveUpdatesPaused": {
+    "description": "Non-alarming banner on Home and the map, shown when the realtime socket is down (server offline, network gone). Generic on purpose so it fits cloud and self-host alike."
+  },
+  "connectionStale": "Locations may be stale — last connected {ago}",
+  "@connectionStale": {
+    "description": "Second line of the offline banner — how stale the map may be, as an age. {ago} is a localized relative time such as \"14 min ago\".",
+    "placeholders": {
+      "ago": { "type": "String" }
+    }
+  },
+  "circlesDashPrecisionTitle": "What this circle sees",
+  "@circlesDashPrecisionTitle": {
+    "description": "Label of the per-circle Precise/City/Paused control on the circles dashboard."
+  },
+  "circlesDashPrecisionPrecise": "This circle sees exactly where you are.",
+  "@circlesDashPrecisionPrecise": {
+    "description": "Description under the per-circle precision control when set to Precise."
+  },
+  "circlesDashPrecisionCity": "This circle sees roughly which part of town you're in — not your exact spot.",
+  "@circlesDashPrecisionCity": {
+    "description": "Description under the per-circle precision control when set to City."
+  },
+  "circlesDashPrecisionPaused": "Paused — your location isn't shared with this circle.",
+  "@circlesDashPrecisionPaused": {
+    "description": "Description under the per-circle precision control when set to Paused."
+  },
+  "homePrecisionFor": "What {circle} sees",
+  "@homePrecisionFor": {
+    "description": "Label above the home screen's precision control, naming the selected circle it applies to.",
+    "placeholders": {
+      "circle": {
+        "type": "String"
+      }
+    }
+  },
+  "homePrecisionPerCircleHint": "Each circle has its own setting. Change the others in My circles.",
+  "@homePrecisionPerCircleHint": {
+    "description": "Hint under the home precision control explaining it only affects the selected circle."
+  },
+  "precisionChangeFailed": "Couldn't change that. Please try again.",
+  "@precisionChangeFailed": {
+    "description": "Snackbar when writing a circle's precision mode failed."
+  },
+  "forkTitle": "Get started",
+  "@forkTitle": {
+    "description": "Heading of the no-circle onboarding fork, shown to a signed-in user who is in no circle yet."
+  },
+  "forkSubtitle": "You're not in a circle yet. Choose how you'd like to begin.",
+  "@forkSubtitle": {
+    "description": "Subtitle under the onboarding fork heading."
+  },
+  "forkCreateTitle": "Create a circle",
+  "@forkCreateTitle": {
+    "description": "Title of the create-a-circle option on the onboarding fork."
+  },
+  "forkCreateBody": "Start a private circle on our server and invite your family with a link.",
+  "@forkCreateBody": {
+    "description": "Body of the create-a-circle option on the onboarding fork."
+  },
+  "forkCreateCta": "Create a circle",
+  "@forkCreateCta": {
+    "description": "Button on the create-a-circle option that opens the name dialog."
+  },
+  "forkJoinTitle": "Join a circle",
+  "@forkJoinTitle": {
+    "description": "Title of the join-a-circle option on the onboarding fork."
+  },
+  "forkJoinBody": "Got an invite link? Paste it to join an existing circle.",
+  "@forkJoinBody": {
+    "description": "Body of the join-a-circle option on the onboarding fork."
+  },
+  "forkJoinCta": "Join with a link",
+  "@forkJoinCta": {
+    "description": "Button on the join-a-circle option that opens the paste-link dialog."
+  },
+  "forkSelfHostTitle": "Run your own server",
+  "@forkSelfHostTitle": {
+    "description": "Title of the self-hosting option on the onboarding fork (coming soon)."
+  },
+  "forkSelfHostBody": "Run Aul on your own computer so your data never leaves your machine. It needs the computer kept on.",
+  "@forkSelfHostBody": {
+    "description": "Body of the self-hosting option, explaining honestly what it means and its trade-off."
+  },
+  "forkComingSoon": "Coming soon",
+  "@forkComingSoon": {
+    "description": "Badge and disabled-button label marking the self-hosting option as not yet available."
+  }
+}

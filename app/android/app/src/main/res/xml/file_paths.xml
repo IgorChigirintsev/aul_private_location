@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Location where downloaded APKs are staged for the installer. -->
+    <cache-path name="apk_cache" path="." />
+    <files-path name="files" path="." />
+    <external-files-path name="ext_files" path="." />
+</paths>

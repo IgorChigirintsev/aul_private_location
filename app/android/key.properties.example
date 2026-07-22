@@ -1,0 +1,6 @@
+# Copy to key.properties (git-ignored) and fill in, or run scripts/gen-keystore.sh.
+# Required only for signed RELEASE builds; debug builds work without it.
+storeFile=../aul-release.jks
+keyAlias=aul
+storePassword=CHANGE_ME
+keyPassword=CHANGE_ME

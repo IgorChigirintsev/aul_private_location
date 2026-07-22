@@ -1,0 +1,48 @@
+{
+  "_comment": "Aul design tokens — single source of truth. Web reads web/src/design/tokens.ts (generated to match); app mirrors app/lib/src/theme.dart. Mood: family hearth + engineering honesty. No corporate-surveillance vibes, no purple AI gradients.",
+  "color": {
+    "light": {
+      "bg": "#FAF7F2",
+      "surface": "#FFFFFF",
+      "primary": "#155E4A",
+      "primaryHover": "#0F4536",
+      "text": "#1C1917",
+      "textSecondary": "#78716C",
+      "accent": "#F59E0B",
+      "danger": "#DC2626",
+      "success": "#16A34A",
+      "border": "#E7E5E4"
+    },
+    "dark": {
+      "bg": "#131211",
+      "surface": "#1C1A19",
+      "primary": "#34D399",
+      "primaryHover": "#2BBE86",
+      "text": "#FAF7F2",
+      "textSecondary": "#A8A29E",
+      "accent": "#F59E0B",
+      "danger": "#F87171",
+      "success": "#4ADE80",
+      "border": "#2A2725"
+    }
+  },
+  "font": {
+    "heading": "'Bricolage Grotesque', 'Clash Display', system-ui, sans-serif",
+    "ui": "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+    "mono": "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
+  },
+  "radius": {
+    "card": "1rem",
+    "control": "0.75rem",
+    "pill": "999px"
+  },
+  "shadow": {
+    "soft": "0 8px 24px rgba(28, 25, 23, 0.06)",
+    "card": "0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px rgba(28, 25, 23, 0.05)"
+  },
+  "motion": {
+    "durationMs": 250,
+    "easing": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+    "markerInterpolateMs": 1000
+  }
+}

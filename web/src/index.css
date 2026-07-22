@@ -1,0 +1,170 @@
+@import 'tailwindcss';
+
+/* Aul theme — mirrors /docs/design-tokens.json. Light by default; the whole app
+   (dashboard included) follows the OS dark preference — see below. */
+@theme {
+  --color-bg: #faf7f2;
+  --color-surface: #ffffff;
+  --color-primary: #155e4a;
+  --color-primary-hover: #0f4536;
+  --color-ink: #1c1917;
+  --color-ink-soft: #78716c;
+  --color-accent: #f59e0b;
+  --color-danger: #dc2626;
+  --color-success: #16a34a;
+  --color-line: #e7e5e4;
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Bricolage Grotesque', 'Clash Display', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-card: 1rem;
+  --radius-control: 0.75rem;
+}
+
+:root {
+  color-scheme: light;
+}
+
+/* Dark mode, app-wide. Tailwind v4's semantic utilities resolve `var(--color-*)`,
+   so overriding the variables under a prefers-color-scheme query re-tints every
+   bg-/text-/border- semantic utility with no per-element `dark:` classes — the
+   dashboard now follows the OS theme too, not only the marketing pages.
+   `--landing-on-primary` is the label colour on the primary button: white on the
+   dashboard's pine primary (both themes) and on the light landing, near-black on
+   the landing's brighter mint. */
+.landing {
+  --landing-on-primary: #ffffff;
+}
+/* The dark palette applies in two cases, and a media query cannot join a
+   selector list, so the block is written twice:
+     1. the OS asks for dark AND the user hasn't forced light, and
+     2. the user explicitly picked dark (<html data-theme="dark">).
+   "System" simply removes the attribute, leaving case 1 in charge. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --color-bg: #131211;
+    --color-surface: #1c1a19;
+    /* A medium pine — bright enough to read as a control on the dark background,
+       dark enough that a white label stays legible on it (unlike the landing's
+       mint, which needs dark text). */
+    --color-primary: #1a7f5d;
+    --color-primary-hover: #22946d;
+    --color-ink: #faf7f2;
+    --color-ink-soft: #a8a29e;
+    --color-danger: #f87171;
+    --color-success: #4ade80;
+    --color-line: #2a2725;
+  }
+  /* Marketing keeps its brighter mint brand primary + a dark-on-mint label. */
+  :root:not([data-theme='light']) .landing {
+    --color-primary: #34d399;
+    --color-primary-hover: #2bbe86;
+    --landing-on-primary: #131211;
+  }
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-bg: #131211;
+  --color-surface: #1c1a19;
+  --color-primary: #1a7f5d;
+  --color-primary-hover: #22946d;
+  --color-ink: #faf7f2;
+  --color-ink-soft: #a8a29e;
+  --color-danger: #f87171;
+  --color-success: #4ade80;
+  --color-line: #2a2725;
+}
+:root[data-theme='dark'] .landing {
+  --color-primary: #34d399;
+  --color-primary-hover: #2bbe86;
+  --landing-on-primary: #131211;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Respect reduced motion (spec §8: motion ≤250ms, honor prefers-reduced-motion). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.maplibregl-map {
+  font-family: var(--font-sans);
+}
+
+/* --- Live map member markers --- */
+/* There is deliberately no decorative halo here. A 72 px translucent disc used to
+   sit under every marker — and at street zoom that is ~250 m of ground, reading
+   as an uncertainty area while meaning absolutely nothing. It now competes with
+   the REAL accuracy circle (map/accuracy.ts), which is the same visual language
+   and does carry a measurement, so a fix sharper than a few hundred metres would
+   have drawn its honest circle inside a bigger, meaningless one. Legibility comes
+   from the ring's shadow instead. */
+.aul-marker { position: relative; width: 44px; height: 44px; cursor: default; }
+.aul-marker__ring {
+  position: absolute; inset: 0; border-radius: 50%; padding: 3px;
+  background: conic-gradient(#155e4a 360deg, rgba(0,0,0,0.08) 0deg);
+  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.28);
+}
+.aul-marker__avatar {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: #155e4a; color: #fff; display: grid; place-items: center;
+  font-weight: 700; font-size: 15px; border: 2px solid #fff;
+}
+.aul-marker__batt {
+  position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
+  font-size: 11px; font-weight: 600; background: #fff; padding: 0 5px;
+  border-radius: 6px; box-shadow: 0 1px 3px rgba(28,25,23,0.18); white-space: nowrap;
+}
+/* Paused sharing: the pin stays where they stopped, but reads as "not live". */
+.aul-marker--paused { filter: grayscale(1); opacity: 0.5; }
+/* Stale fix: the device stopped reporting, so its last position is no longer
+   trustworthy as "where it is now". Dimmed (a touch less than paused, and only
+   partly desaturated) so it reads as "was here, not confirmed live" rather than a
+   deliberate pause. */
+.aul-marker--stale { filter: grayscale(0.7); opacity: 0.55; }
+/* SOS: the person raising the alarm must be unmistakable for everyone watching.
+   A red pulsing ring overrides the battery ring while their SOS is active, and it
+   beats any paused/stale dimming (someone in distress must never look faded). */
+.aul-marker--sos { filter: none !important; opacity: 1 !important; }
+.aul-marker--sos .aul-marker__ring {
+  background: #dc2626 !important;
+  /* Must beat the generic one-shot `.aul-marker--pulse` rule below: a marker
+     keeps that class after its first fix, and with equal specificity source
+     order would otherwise let the green fresh-fix pulse override the red SOS
+     one — leaving the SOS pin red but NOT pulsing. !important keeps it alive. */
+  animation: aul-sos-pulse 1s ease-in-out infinite !important;
+}
+@keyframes aul-sos-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6); }
+  50% { box-shadow: 0 0 0 13px rgba(220, 38, 38, 0); }
+}
+.aul-marker__tag {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.02em; line-height: 1;
+  background: #155E4A; color: #fff; padding: 2px 5px; border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(28,25,23,0.28); white-space: nowrap; z-index: 1;
+}
+.aul-marker--pulse .aul-marker__ring { animation: aul-pulse 0.8s ease-out; }
+@keyframes aul-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(21, 94, 74, 0.45); }
+  100% { box-shadow: 0 0 0 18px rgba(21, 94, 74, 0); }
+}

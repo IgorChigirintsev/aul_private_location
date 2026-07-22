@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Allow: /download
+# Private invite links carry a circle key in the URL fragment — keep them out of indexes.
+Disallow: /i/
+# Live-share links carry K_share in the URL fragment, and the first device to open
+# one claims it — a crawler must never be that device.
+Disallow: /s/
+
+Sitemap: https://aul.app/sitemap.xml

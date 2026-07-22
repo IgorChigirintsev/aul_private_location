@@ -1,0 +1,25 @@
+# golangci-lint v2 configuration for the Aul server.
+version: "2"
+
+linters:
+  enable:
+    - govet
+    - errcheck
+    - staticcheck   # includes former gosimple/stylecheck checks
+    - ineffassign
+    - unused
+    - misspell
+    - bodyclose
+    - rowserrcheck
+    - sqlclosecheck
+    - noctx
+    - unconvert
+    - errorlint
+  exclusions:
+    rules:
+      # Generated sqlc code is not linted to our standards.
+      - path: internal/store/
+        linters: [errcheck, staticcheck, unused, unconvert]
+      # Test helpers may ignore some errors for brevity.
+      - path: _test\.go
+        linters: [errcheck, bodyclose, noctx]

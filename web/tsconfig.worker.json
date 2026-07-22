@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.worker.tsbuildinfo",
+    "target": "es2023",
+    // The service worker runs in a WorkerGlobalScope: no DOM, but `self` is a
+    // ServiceWorkerGlobalScope. tsconfig.app.json excludes src/sw.ts for exactly
+    // this reason — the two lib sets cannot be mixed in one project.
+    "lib": ["ES2023", "WebWorker"],
+    "types": [],
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": false,
+    "noFallthroughCasesInSwitch": true
+  },
+  // Only the entry point: the modules it shares with the app (aulCrypto,
+  // keystore, notifyCodec) are pulled in through the import graph and so get
+  // type-checked against the worker libs too — that is the point, they must
+  // compile in BOTH contexts.
+  "include": ["src/sw.ts"]
+}

@@ -1,0 +1,427 @@
+{
+  "common": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "cancel": "Cancel",
+    "close": "Close",
+    "done": "Done",
+    "gotIt": "Got it",
+    "loading": "Loading…",
+    "precision": {
+      "precise": "Precise",
+      "city": "City",
+      "paused": "Paused"
+    },
+    "unit": {
+      "m": "m",
+      "km": "km"
+    }
+  },
+  "theme": {
+    "label": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "ru": "Russian",
+    "enShort": "EN",
+    "ruShort": "RU"
+  },
+  "landing": {
+    "header": {
+      "signIn": "Sign in",
+      "download": "Download"
+    },
+    "hero": {
+      "badge": "Open source · AGPL-3.0 server",
+      "titleLead": "Private family location,",
+      "titleHighlight": "end-to-end encrypted",
+      "subtitle": "Your circle, your data, nobody else's. An open-source alternative to Life360 where the server never sees your coordinates.",
+      "downloadAndroid": "Download for Android",
+      "openWebApp": "Open web app",
+      "openDashboard": "Open dashboard",
+      "noAds": "No ads. No trackers. No data sales."
+    },
+    "valueProps": {
+      "e2e": {
+        "title": "End-to-end encrypted",
+        "body": "Locations, place names and geofences are sealed on your device. The server stores ciphertext blobs it cannot read — only your circle holds the key."
+      },
+      "noSelling": {
+        "title": "No ads, no trackers, no data sales",
+        "body": "There is no ad SDK, no third-party analytics, nothing to sell. Privacy is the product, not the cost of admission."
+      },
+      "selfHost": {
+        "title": "Open source & self-hostable",
+        "body": "The whole stack is open source (AGPL) — audit it, or run it on your own server if you'd rather. Either way the trust model is the same; most people just use our cloud."
+      },
+      "antiStalk": {
+        "title": "Anti-stalking by design",
+        "body": "No hidden mode. A reporter always shows a visible notification, one tap reveals exactly who can see you, and leaving is instant and unilateral."
+      }
+    },
+    "howItWorks": "How it works",
+    "steps": {
+      "create": {
+        "title": "Create a circle",
+        "body": "Start a private circle for your family or household. A fresh encryption key is generated on your device."
+      },
+      "invite": {
+        "title": "Invite family by link",
+        "body": "Share a one-tap invite link. The circle key rides in the link fragment and never reaches the server."
+      },
+      "seeMap": {
+        "title": "See everyone on a live map",
+        "body": "Watch your circle move in real time on an encrypted live map — decrypted only in your app, never on the server."
+      }
+    },
+    "oss": {
+      "title": "Open source, top to bottom",
+      "body": "The server is <b>AGPL-3.0</b> and the clients are <b>MIT</b>. Audit the crypto, run it yourself, or send a pull request. Nothing about your privacy is hidden behind a closed binary.",
+      "viewGithub": "View on GitHub"
+    },
+    "faq": {
+      "title": "Frequently asked",
+      "q1": "Is it really end-to-end encrypted?",
+      "a1": "Yes. Location pings, place names and geofences are encrypted on your device with a circle key that never leaves your circle. The server only ever receives and stores ciphertext it cannot decrypt. The code is open — read the threat model and check for yourself.",
+      "q2": "Is it free and open source?",
+      "a2": "Yes. The server is licensed AGPL-3.0 and the clients (web and app) are MIT. There is no paid tier gating your privacy — self-host for free, or use our cloud.",
+      "q3": "Can I self-host?",
+      "a3": "Yes — the whole backend is open source (one Go binary that also serves the web app and the APK), so you can run it on your own server. It is a technical path (clone the repo, set your secrets, bring the stack up with Docker), not a one-click product — most people just use our cloud.",
+      "q4": "Why not on Google Play?",
+      "a4": "The Android app is distributed off-Play so the build you install is exactly the source you can audit. Each release publishes its SHA-256, and the in-app updater verifies that digest before installing — no store intermediary, no silent repackaging.",
+      "q5": "Do you have an iOS app?",
+      "a5": "Android first, iOS later. The app is being built Android-first; an iOS client is on the roadmap. In the meantime the web app works in any modern browser."
+    },
+    "finalCta": "Keep your circle close — and private.",
+    "footer": {
+      "download": "Download",
+      "threatModel": "Threat model"
+    }
+  },
+  "download": {
+    "back": "Back",
+    "title": "Download Aul",
+    "subtitle": "Private family location, end-to-end encrypted. Get the Android app below, or open the web app to try it in your browser.",
+    "android": {
+      "title": "Android",
+      "version": "Version {{name}}",
+      "build": "(build {{code}})",
+      "downloadApk": "Download APK",
+      "noApk": "This build has no APK attached yet — <a>build from source</a>.",
+      "installTitle": "Installing off-Play",
+      "installBody": "Aul is distributed outside the Play Store, so your source stays auditable. When you open the APK, Android will ask you to enable <b>“install unknown apps”</b> for your browser — allow it once. After the first install the app updates itself: every update is downloaded and its SHA-256 verified before it installs."
+    },
+    "sha": {
+      "verify": "verify: sha256sum aul-{{version}}.apk"
+    },
+    "notPublished": {
+      "body": "<b>Coming soon.</b> No signed build has been published yet. In the meantime you can build the app from source.",
+      "build": "Build from source"
+    },
+    "error": {
+      "title": "Couldn't load the latest release",
+      "body": "Something went wrong reaching the server. Check your connection and try again.",
+      "retry": "Try again"
+    },
+    "ios": {
+      "title": "iOS",
+      "subtitle": "Coming soon — App Store.",
+      "body": "Aul is being built Android-first; an iPhone app is on the roadmap. Until then, the web app works in any modern browser.",
+      "openWebApp": "Open web app instead"
+    },
+    "footer": "Every release is reproducible from source and its SHA-256 is published above."
+  },
+  "auth": {
+    "tagline": "Private family location, end-to-end encrypted. We don't see your data — check the code.",
+    "createAccount": "Create account",
+    "signIn": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "error": "Something went wrong",
+    "disclaimer": "The web dashboard is a convenience with a weaker trust model than the app (its code is served by the server). Use the app for anything sensitive."
+  },
+  "join": {
+    "joining": "Joining your circle…",
+    "missingKey": "This invite link is missing its circle key.",
+    "malformed": "This invite link is malformed.",
+    "failed": "Could not join with this link — it may be expired."
+  },
+  "dashboard": {
+    "circleFallback": "Your circle",
+    "empty": {
+      "title": "Start your circle",
+      "body": "Create a family circle, then invite the people you love.",
+      "create": "Create a circle"
+    },
+    "prompt": {
+      "nameCircle": "Name your circle",
+      "nameCircleDefault": "Family",
+      "sos": "Send an SOS to your circle. Add a short message (optional):"
+    },
+    "tip": {
+      "places": "Places",
+      "raiseSos": "Raise SOS",
+      "whoSeesMe": "Who can see me",
+      "verify": "Verify devices",
+      "rotateKey": "Rotate circle key",
+      "invite": "Invite",
+      "share": "Live share link",
+      "preferences": "Preferences",
+      "signOut": "Sign out",
+      "northUp": "North up",
+      "recenter": "Centre on me"
+    },
+    "noKey": "This circle's key isn't on this device, so locations can't be decrypted here. Open your invite link in this browser to add it.",
+    "connection": {
+      "paused": "Live updates paused — reconnecting…",
+      "stale": "Locations may be stale — last connected {{ago}}"
+    },
+    "who": {
+      "title": "Who can see me",
+      "body": "Your encrypted location is shared with <b>{{circleName}}</b>. Only its members can decrypt it — the server stores ciphertext it cannot read."
+    }
+  },
+  "members": {
+    "heading": "People",
+    "accuracy": "±{{value}} {{unit}}",
+    "accuracyTitle": "How vague this fix is: the device is somewhere within this radius, not exactly on the pin.",
+    "wifiHint": "This PC has no GPS — it locates itself from nearby Wi-Fi, and it won't get sharper. Use your phone for a precise pin.",
+    "stale": "stale",
+    "staleTitle": "This location may be out of date — this device hasn't reported in a while, so it may have moved.",
+    "centerOnMap": "Tap to centre the map on them",
+    "ago": {
+      "justNow": "just now",
+      "min_one": "{{count}} min ago",
+      "min_few": "{{count}} min ago",
+      "min_many": "{{count}} min ago",
+      "min_other": "{{count}} min ago",
+      "hour_one": "{{count}} h ago",
+      "hour_few": "{{count}} h ago",
+      "hour_many": "{{count}} h ago",
+      "hour_other": "{{count}} h ago"
+    },
+    "empty": "Just you so far. Invite your family below.",
+    "mute": "Mute {{name}} — stop their notifications reaching you",
+    "unmute": "Unmute {{name}} — let their notifications reach you again",
+    "remove": "Remove from circle",
+    "removeConfirm": "Remove {{name}} from this circle? They stop seeing everyone, and stop sharing with you.",
+    "rotateAfterRemove": "Removed. They still hold the old circle key, so they could read data sent from now on. Rotate the circle key now?"
+  },
+  "places": {
+    "heading": "Places",
+    "namePlaceholder": "Place name (e.g. Home)",
+    "centreSet": "Centre set. Adjust the radius, then save.",
+    "clickMap": "Click the map to set the centre.",
+    "radiusLabel": "Geofence radius:",
+    "saveChanges": "Save changes",
+    "addPlace": "Add place",
+    "addAPlace": "Add a place",
+    "empty": "No places yet. Add Home, Work, School…",
+    "confirmDelete": "Delete place \"{{name}}\"?",
+    "addedBy": "Added by {{name}}",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "sos": {
+    "title": "SOS · someone needs help",
+    "noMessage": "No message",
+    "encrypted": "Encrypted — add this circle's key to read the details",
+    "resolve": "Resolve"
+  },
+  "geofence": {
+    "atPlaces": "At places",
+    "nobody": "Nobody inside a place right now.",
+    "presenceRow": "<id>{{id}}</id> is at <place>{{place}}</place>",
+    "eventEnter": "<id>{{id}}</id> arrived at <place>{{place}}</place>",
+    "eventExit": "<id>{{id}}</id> left <place>{{place}}</place>",
+    "eta": {
+      "lessMin": "<1 min",
+      "min": "{{count}} min",
+      "hourMin": "{{h}} h {{rem}} min",
+      "hour": "{{h}} h"
+    },
+    "notify": {
+      "arrived": "{{name}} arrived at {{place}}"
+    }
+  },
+  "push": {
+    "arrived": "{{who}} arrived at {{place}}",
+    "left": "{{who}} left {{place}}",
+    "generic": "Activity in your circle"
+  },
+  "verify": {
+    "title": "Verify devices",
+    "description": "Compare these emoji with the other person, in person or on a call. If they match, no one has tampered with your keys.",
+    "noIdentity": "No identity key on this device.",
+    "loadFailed": "Could not load devices.",
+    "computing": "Computing safety codes…",
+    "noDevices": "Nothing to compare yet",
+    "noDevicesWhy": "A safety code always compares two devices — yours and someone else's. You're the only device in this circle with a key, so there's no pair to make a code from yet. Invite someone (or add a second device of your own), and a code will appear here to compare.",
+    "deviceLabel": "{{platform}} device",
+    "safetyCodeAria": "safety code {{hex}}"
+  },
+  "invite": {
+    "title": "Invite to your circle",
+    "error": "Could not create an invite",
+    "creating": "Creating invite…",
+    "qrAlt": "Invite QR code",
+    "note": "This link contains your circle key in the part after <code>#</code>, which the server never receives. Share it only with family."
+  },
+  "share": {
+    "title": "Live share link",
+    "intro": "Creates a link that shows your live location to one person — no account needed. Whoever opens it first keeps it; nobody else can. It stops at the deadline, or the moment you revoke it.",
+    "duration": "How long",
+    "minutes": "{{minutes}} min",
+    "create": "Create link",
+    "creating": "Creating…",
+    "error": "Could not create a share link",
+    "linkTitle": "Your share link",
+    "note": "The key that decrypts your position is the part after <code>#</code>, which the server never receives. Anyone holding the whole link can watch you until it ends.",
+    "active": "Active links",
+    "none": "No active share links.",
+    "endsIn": "Ends in {{countdown}}",
+    "claimed": "Open — a viewer has this link",
+    "unclaimed": "Not opened yet — the first device to open it keeps it",
+    "noKeyHere": "Made in another browser: its link can't be shown here, but you can still revoke it.",
+    "revoke": "Revoke",
+    "revokeConfirm": "Revoke this link? Whoever is watching stops seeing you immediately.",
+    "bannerSharing": "Sharing your live location",
+    "view": {
+      "title": "Live location",
+      "connecting": "Connecting…",
+      "endsIn": "Ends in {{countdown}}",
+      "waiting": {
+        "title": "Waiting for the first position",
+        "body": "The link works. There's nothing to show until their device sends its first update."
+      },
+      "expired": {
+        "title": "This link has expired",
+        "body": "The live share is over. Ask for a new link if you still need one."
+      },
+      "forbidden": {
+        "title": "This link is open somewhere else",
+        "body": "A live-share link works on one device only, and another one opened this first. Ask for a new link."
+      },
+      "notFound": {
+        "title": "This link doesn't exist",
+        "body": "It may have been mistyped or already cleaned up. Ask for a new link."
+      },
+      "missingKey": {
+        "title": "This link is missing its key",
+        "body": "The part after # is what decrypts the location. Copy the whole link and open it again."
+      },
+      "badKey": {
+        "title": "This link's key doesn't fit",
+        "body": "The part after # can't decrypt this location. Copy the whole link again, exactly as you got it."
+      },
+      "offline": {
+        "title": "Can't reach the server",
+        "body": "Check your connection — this page keeps trying."
+      },
+      "privacy": "You see only this person, only until the countdown ends. The server stores the position encrypted and cannot read it.",
+      "focusNote": "The map hides when this tab loses focus."
+    }
+  },
+  "prefs": {
+    "title": "Preferences",
+    "serverDisabled": "These optional features have been turned off by the server operator, so they can't be enabled here.",
+    "intro": "Optional, on-device features. Everything below is computed from data already decrypted in your browser — nothing new is sent to the server. All off until you turn them on.",
+    "arrival": {
+      "title": "Arrival alerts & ETA",
+      "desc": "Rough ETAs in the places feed, plus a notification when someone arrives."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "granted": "Allowed — arrival alerts can pop up while this tab is open.",
+      "denied": "Blocked in your browser settings.",
+      "unsupported": "Not supported in this browser.",
+      "default": "Not yet allowed.",
+      "allow": "Allow"
+    },
+    "push": {
+      "title": "Background notifications",
+      "desc": "Alerts even when this tab is closed. Your browser is woken by a sealed blob the server relays but cannot read — it never learns who arrived where.",
+      "unsupported": "This browser doesn't support background notifications.",
+      "denied": "Notifications are blocked in your browser settings.",
+      "failed": "Couldn't turn background notifications on. Try again later.",
+      "serverOff": "This server has no push keys configured, so alerts only appear while this tab is open."
+    },
+    "backgroundNote": "With background notifications off, alerts only appear while this tab is open."
+  },
+  "circlesDash": {
+    "open": "My circles",
+    "title": "My circles",
+    "subtitle": "Every circle you're in, and what you give each one.",
+    "empty": "You're not in any circle yet.",
+    "youAs": "You as {{nick}}",
+    "youNoNick": "You (no nickname set here)",
+    "visibility": {
+      "title": "Share my location",
+      "on": "This circle sees where you are.",
+      "off": "Paused — your location isn't shared with this circle."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "on": "This circle's members can send you notifications.",
+      "off": "Muted — notifications from this circle's members don't reach you."
+    }
+  },
+  "profile": {
+    "title": "Your profile in this circle",
+    "nickname": "Nickname",
+    "nicknamePlaceholder": "How you appear to this circle",
+    "avatar": "Photo",
+    "choosePhoto": "Choose photo",
+    "changePhoto": "Change photo",
+    "removePhoto": "Remove photo",
+    "zoom": "Zoom",
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "you": "(you)",
+    "tooltip": "Edit your profile",
+    "tooLarge": "That image is too large. Try a smaller crop.",
+    "imageError": "Couldn't read that image. Try another.",
+    "saveError": "Couldn't save your profile. Try again."
+  },
+  "circles": {
+    "yours": "Your circles",
+    "owner": "owner",
+    "rename": "Rename circle",
+    "leave": "Leave circle",
+    "create": "New circle",
+    "renamePrompt": "New circle name",
+    "leaveConfirm": "Leave this circle? You'll stop sharing your location with it and stop seeing its members.",
+    "soleOwner": "You're the only owner, so you can't just leave. Delete this circle for everyone instead?",
+    "delete": "Delete circle",
+    "deleteConfirm": "Delete \"{{name}}\" for everyone? This permanently removes the circle and all its data. This cannot be undone."
+  },
+  "errors": {
+    "rate_limited": "Too many attempts. Please wait a moment and try again.",
+    "account_locked": "Too many attempts — this account is temporarily locked. Try again later.",
+    "payload_too_large": "That’s too large to send.",
+    "internal_error": "Something went wrong on our end. Please try again.",
+    "timeout": "The request timed out. Please try again.",
+    "forbidden": "You don’t have permission to do that.",
+    "network": "Can’t reach the server. Check your connection and try again."
+  },
+  "start": {
+    "title": "Start your circle",
+    "body": "Pick how you want to begin.",
+    "create": {
+      "title": "Create a circle",
+      "body": "Start a new circle on Aul, then invite your people."
+    },
+    "join": {
+      "title": "Join an existing circle",
+      "body": "Paste an invite link you were sent.",
+      "placeholder": "Paste your invite link",
+      "submit": "Join circle",
+      "error": "That doesn't look like a valid invite link."
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# The `live` tag marks integration tests that need a running Aul server.
+# CI excludes them (flutter test --exclude-tags live); run locally against a
+# server on :8080.
+tags:
+  live:

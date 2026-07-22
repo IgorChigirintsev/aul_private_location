@@ -1,0 +1,136 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  server:
+    name: server (lint • test • security)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: aul
+          POSTGRES_PASSWORD: aul
+          POSTGRES_DB: aul
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U aul -d aul"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      # TEST_DATABASE_URL, not DATABASE_URL: the integration suite TRUNCATEs every
+      # table, so it refuses to run against the variable a real server uses (that
+      # fallback once wiped a dev database). This service container is throwaway.
+      TEST_DATABASE_URL: postgres://aul:aul@localhost:5433/aul?sslmode=disable
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+          cache-dependency-path: server/go.sum
+
+      - name: gofmt
+        run: |
+          out=$(gofmt -l $(find . -name '*.go' -not -path './internal/store/*'))
+          if [ -n "$out" ]; then echo "gofmt needed:"; echo "$out"; exit 1; fi
+
+      - name: go vet
+        run: go vet ./...
+
+      - name: sqlc up to date
+        run: |
+          go install github.com/sqlc-dev/sqlc/cmd/sqlc@v1.31.1
+          sqlc generate
+          git diff --exit-code -- internal/store || (echo "::error::sqlc code is stale; run 'sqlc generate'"; exit 1)
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: v2.12.2
+          working-directory: server
+
+      - name: gosec
+        run: |
+          go install github.com/securego/gosec/v2/cmd/gosec@latest
+          gosec -quiet -exclude-generated ./...
+
+      - name: govulncheck
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@latest
+          govulncheck ./...
+
+      - name: test (unit + integration, race)
+        run: go test -p 1 -race -tags=integration ./...
+
+      - name: build
+        run: go build ./...
+
+  docker:
+    name: docker image builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build server image
+        run: docker build -t aul-server:ci --build-arg VERSION=ci server
+
+  app:
+    name: app (Flutter analyze • test • build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.1'
+          channel: stable
+      - run: flutter pub get
+      - name: Codegen (drift)
+        run: dart run build_runner build
+      - name: Analyze
+        run: flutter analyze
+      - name: Test (excluding live-server integration tests)
+        run: flutter test --exclude-tags live
+      - name: Build debug APK
+        run: flutter build apk --debug --target-platform android-arm64
+
+  web:
+    name: web (lint • test • build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Unit tests (crypto cross-vectors + realtime pipeline)
+        run: npm test
+      - name: Build (tsc + vite + PWA)
+        run: npm run build
+      # The Playwright acceptance test (login → live map movement) needs the full
+      # server stack; run it locally with `PW_BASE_URL` or a compose e2e job.

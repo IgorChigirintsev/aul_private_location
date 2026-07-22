@@ -1,0 +1,202 @@
+name: Release
+
+# Builds and publishes a SIGNED Android release APK on an app version tag.
+#
+# Trigger:
+#   - push tag `app-v*`   → real release (signed if secrets present, GitHub Release created)
+#   - workflow_dispatch   → manual dry-run (no tag → no GitHub Release, no DB publish)
+#
+# Mirrors app/scripts/gen-keystore.sh's fallback philosophy: when the signing
+# secrets are absent the build falls back to debug signing (see
+# app/android/app/build.gradle.kts) and the DB publish step is skipped, so the
+# whole workflow stays valid and runnable with zero secrets configured.
+#
+# Secrets consumed (all optional — absence = dry-run):
+#   ANDROID_KEYSTORE_BASE64  base64 of the release .jks
+#   ANDROID_STORE_PASSWORD   keystore password
+#   ANDROID_KEY_PASSWORD     key password
+#   ANDROID_KEY_ALIAS        key alias (e.g. "aul")
+#   DATABASE_URL             Postgres DSN for `aul publish-version`
+
+on:
+  push:
+    tags:
+      - 'app-v*'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write # create a GitHub Release and upload the APK asset
+
+jobs:
+  android-release:
+    name: android release (build • sign • publish)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.1'
+          channel: stable
+
+      # Presence detection MUST NOT put a secret in a job/step-level `if:`.
+      # We test the secrets inside a script (they are auto-masked in logs) and
+      # export plain booleans that later steps gate on.
+      - name: Detect signing secrets
+        id: detect
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          set -eu
+          if [ -n "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo "has_keystore=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_keystore=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No ANDROID_KEYSTORE_BASE64 secret — building a DEBUG-signed dry-run APK."
+          fi
+          if [ -n "$DATABASE_URL" ]; then
+            echo "has_db=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_db=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Decode the keystore and scaffold android/key.properties in the exact
+      # shape app/android/app/build.gradle.kts expects:
+      #   rootProject.file("key.properties")  → app/android/key.properties
+      #   storeFile resolved relative to app/android → ../aul-release.jks
+      # This matches gen-keystore.sh so a signed `flutter build apk --release`
+      # picks up the release signingConfig.
+      - name: Configure release signing
+        if: steps.detect.outputs.has_keystore == 'true'
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          set -eu
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > app/aul-release.jks
+          {
+            echo "storePassword=${ANDROID_STORE_PASSWORD}"
+            echo "keyPassword=${ANDROID_KEY_PASSWORD}"
+            echo "keyAlias=${ANDROID_KEY_ALIAS}"
+            echo "storeFile=../aul-release.jks"
+          } > app/android/key.properties
+          echo "Wrote app/android/key.properties and app/aul-release.jks (release signing enabled)."
+
+      - name: Build release APK
+        working-directory: app
+        run: |
+          set -eu
+          flutter pub get
+          # Drift codegen (matches ci.yml) — generated *.g.dart are needed to build.
+          dart run build_runner build --delete-conflicting-outputs
+          # Universal (fat) APK — simplest artifact for direct self-update install.
+          # Falls back to debug signing when key.properties is absent (build.gradle.kts).
+          flutter build apk --release
+
+      # Derive the version, compute the SHA-256, and stage the APK under its
+      # published name (aul-<version>.apk).
+      - name: Compute release metadata
+        id: meta
+        run: |
+          set -eu
+          if [ "${GITHUB_REF#refs/tags/app-v}" != "$GITHUB_REF" ]; then
+            # Tag push: app-v1.2.0 → 1.2.0
+            VERSION_NAME="${GITHUB_REF_NAME#app-v}"
+          else
+            # Manual dry-run (no tag): take the version_name from pubspec.yaml.
+            VERSION_NAME="$(awk -F'[:+]' '/^version:/{print $2}' app/pubspec.yaml | tr -d '[:space:]')"
+          fi
+          # versionCode is the "+N" build number in pubspec.yaml (version: X.Y.Z+N).
+          VERSION_CODE="$(awk -F'+' '/^version:/{print $2}' app/pubspec.yaml | tr -d '[:space:]')"
+
+          APK_SRC="app/build/app/outputs/flutter-apk/app-release.apk"
+          APK_PATH="aul-${VERSION_NAME}.apk"
+          cp "$APK_SRC" "$APK_PATH"
+          SHA256="$(sha256sum "$APK_PATH" | cut -d' ' -f1)"
+
+          {
+            echo "version_name=$VERSION_NAME"
+            echo "version_code=$VERSION_CODE"
+            echo "apk_path=$APK_PATH"
+            echo "sha256=$SHA256"
+          } >> "$GITHUB_OUTPUT"
+          # Also export to the job env for convenience in later run: scripts.
+          {
+            echo "VERSION_NAME=$VERSION_NAME"
+            echo "VERSION_CODE=$VERSION_CODE"
+            echo "APK_PATH=$APK_PATH"
+            echo "SHA256=$SHA256"
+          } >> "$GITHUB_ENV"
+
+          echo "Built $APK_PATH  (versionCode=$VERSION_CODE)"
+          echo "SHA-256: $SHA256"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aul-${{ steps.meta.outputs.version_name }}-apk
+          path: ${{ steps.meta.outputs.apk_path }}
+          if-no-files-found: error
+
+      # Real releases only (tag push, or a dispatch explicitly run on a tag).
+      # Uses the built-in GITHUB_TOKEN via gh — no third-party action to pin.
+      - name: Create GitHub Release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          NOTES="$(printf '%s\n' \
+            "Aul Android ${VERSION_NAME} (versionCode ${VERSION_CODE})" \
+            "" \
+            "APK: ${APK_PATH}" \
+            "SHA-256: \`${SHA256}\`" \
+            "" \
+            "Verify before installing:" \
+            '```' \
+            "sha256sum ${APK_PATH}" \
+            '```')"
+          gh release create "$GITHUB_REF_NAME" "$APK_PATH" \
+            --title "Aul Android ${VERSION_NAME}" \
+            --notes "$NOTES"
+
+      # Go toolchain only needed for the (guarded) DB publish below.
+      - uses: actions/setup-go@v5
+        if: steps.detect.outputs.has_keystore == 'true' && steps.detect.outputs.has_db == 'true' && github.ref_type == 'tag'
+        with:
+          go-version: '1.25'
+          cache-dependency-path: server/go.sum
+
+      # Register the release in app_versions so
+      # GET /v1/version/latest?platform=android serves this build.
+      #
+      # GUARDED: runs only for a real signed tag build with a reachable DB.
+      # Note: production DBs are usually NOT reachable from GitHub runners, so in
+      # practice self-hosters run the same CLI on the server host after the APK
+      # is placed under /download/. This step keeps the automated path wired up
+      # (and the workflow valid) when DATABASE_URL is a CI-reachable DSN.
+      - name: Register version in app_versions (publish-version)
+        if: steps.detect.outputs.has_keystore == 'true' && steps.detect.outputs.has_db == 'true' && github.ref_type == 'tag'
+        working-directory: server
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          set -eu
+          # Sibling task adds the `publish-version` subcommand to cmd/aul.
+          # APK is served from the server's own /download/ path (see docs/RELEASE.md).
+          go run ./cmd/aul publish-version \
+            --platform android \
+            --version-code "$VERSION_CODE" \
+            --version-name "$VERSION_NAME" \
+            --apk-url "/download/aul-${VERSION_NAME}.apk" \
+            --sha256 "$SHA256" \
+            --changelog "Aul Android ${VERSION_NAME}" \
+            --min-supported 1

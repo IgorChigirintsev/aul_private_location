@@ -1,0 +1,20 @@
+gradle-wrapper.jar
+/.gradle
+/captures/
+/gradlew
+/gradlew.bat
+/local.properties
+GeneratedPluginRegistrant.java
+.cxx/
+
+# Remember to never publicly share your keystore.
+# See https://flutter.dev/to/reference-keystore
+key.properties
+**/*.keystore
+**/*.jks
+
+# Firebase (FCM) config. NOT a secret — it ships inside the APK and anyone can
+# extract it. It is untracked because it binds a build to ONE Firebase project:
+# Aul is self-hostable, so each operator brings their own project (or uses no
+# push at all — the server boots fine without it). See docs/RELEASE.md.
+**/google-services.json

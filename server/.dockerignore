@@ -1,0 +1,7 @@
+bin/
+aul
+*.test
+*.out
+coverage.*
+webdist/assets/
+.git/
