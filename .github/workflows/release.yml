@@ -185,6 +185,52 @@ jobs:
           fi
           echo "Release signature confirmed."
 
+      # Everything above this point can pass on an APK that cannot start at all.
+      # 1.0.0 shipped exactly that: R8 renamed WorkManager's Room database, the
+      # app died in a content provider before any Dart ran, and every check was
+      # green — CI only ever built --debug, where R8 does not run, and the Dart
+      # test suite never touches the native layer.
+      #
+      # So: actually RUN the artifact we are about to publish. This must stay
+      # BEFORE the upload and release steps, so a crashing build fails the job
+      # instead of reaching users.
+      - name: Enable KVM (hardware acceleration for the emulator)
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
+            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Smoke test — the APK must actually launch
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          # >= minSdk 26 (build.gradle.kts). x86_64 is in the universal APK.
+          api-level: 30
+          arch: x86_64
+          target: default
+          disable-animations: true
+          script: |
+            set -eu
+            adb install -r "$APK_PATH"
+            adb logcat -c
+            adb shell am start -n app.aul.aul/.MainActivity
+            # Startup crashes surface within seconds; allow slack for a cold boot.
+            sleep 25
+
+            if adb logcat -d -b crash | grep -q 'app\.aul\.aul'; then
+              echo "::error::The APK crashed on launch — refusing to publish it."
+              adb logcat -d -b crash | tail -60
+              exit 1
+            fi
+
+            pid="$(adb shell pidof app.aul.aul | tr -d '\r')"
+            if [ -z "$pid" ]; then
+              echo "::error::The app is not running 25s after launch — refusing to publish it."
+              adb logcat -d | grep -iE 'app\.aul\.aul|AndroidRuntime|FATAL' | tail -60
+              exit 1
+            fi
+            echo "App launched and is still alive (pid $pid)."
+
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
