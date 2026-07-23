@@ -66,6 +66,14 @@ android {
 
     buildTypes {
         release {
+            // Flutter shrinks release builds with R8. Anything resolved by name
+            // at runtime must be kept explicitly — see proguard-rules.pro, which
+            // exists because WorkManager's Room database was being renamed and
+            // crashed the app on launch.
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
             signingConfig = if (keystorePropertiesFile.exists()) {
                 signingConfigs.getByName("release")
             } else {
