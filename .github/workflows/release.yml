@@ -209,27 +209,12 @@ jobs:
           arch: x86_64
           target: default
           disable-animations: true
-          script: |
-            set -eu
-            adb install -r "$APK_PATH"
-            adb logcat -c
-            adb shell am start -n app.aul.aul/.MainActivity
-            # Startup crashes surface within seconds; allow slack for a cold boot.
-            sleep 25
-
-            if adb logcat -d -b crash | grep -q 'app\.aul\.aul'; then
-              echo "::error::The APK crashed on launch — refusing to publish it."
-              adb logcat -d -b crash | tail -60
-              exit 1
-            fi
-
-            pid="$(adb shell pidof app.aul.aul | tr -d '\r')"
-            if [ -z "$pid" ]; then
-              echo "::error::The app is not running 25s after launch — refusing to publish it."
-              adb logcat -d | grep -iE 'app\.aul\.aul|AndroidRuntime|FATAL' | tail -60
-              exit 1
-            fi
-            echo "App launched and is still alive (pid $pid)."
+          # ONE line, deliberately. This action runs `script:` line by line, each
+          # in its own `sh -c`, so a multi-line `if` here fails with
+          # "Syntax error: end of file unexpected (expecting \"fi\")" — the shell
+          # running the `if` never sees the `fi`. The logic lives in a file,
+          # which also makes it runnable by hand against a local emulator.
+          script: bash app/scripts/smoke-test.sh "$APK_PATH"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
