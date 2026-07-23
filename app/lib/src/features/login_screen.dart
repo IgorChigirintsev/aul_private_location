@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../controller.dart';
+import '../defaults.dart';
 import '../theme.dart';
+import 'locale_controller.dart';
 
 /// Localizes a server error by its stable code where a generic message is clearly
 /// right (rate-limited, locked, timeout…); otherwise returns the server's own
@@ -30,7 +32,10 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
-  final _server = TextEditingController();
+  // Prefilled: a blank field is unanswerable on a first run — nothing on screen
+  // says what a "server" is here, and submitting empty fails as "network error".
+  // Still editable, because self-hosting is the point of the field.
+  final _server = TextEditingController(text: kDefaultServerUrl);
   final _email = TextEditingController();
   final _password = TextEditingController();
   bool _register = true;
@@ -79,7 +84,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 12),
+                  const Align(
+                    alignment: Alignment.centerRight,
+                    child: _LanguageMenu(),
+                  ),
                   Text(
                     'Aul',
                     style: TextStyle(
@@ -120,6 +128,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     decoration: InputDecoration(
                       labelText: l10n.loginServerLabel,
                       hintText: l10n.loginServerHint,
+                      // helperText, not just hintText: Material hides the hint
+                      // behind the label while the field is unfocused, so the
+                      // explanation was invisible exactly when it was needed.
+                      helperText: l10n.loginServerHelp,
+                      helperMaxLines: 2,
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -169,6 +182,50 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Language picker for the signed-out screens. The full picker lives in About,
+/// but that screen is reachable only AFTER signing in — so anyone whose device
+/// language resolved to the wrong one had no way to change it while still
+/// looking at the login form.
+class _LanguageMenu extends ConsumerWidget {
+  const _LanguageMenu();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    // "system" as a sentinel rather than null: PopupMenuButton treats a null
+    // selection as a dismissal and never calls onSelected, so a nullable value
+    // would silently make the "System" entry do nothing.
+    final current =
+        ref.watch(localeControllerProvider)?.languageCode ?? 'system';
+
+    return PopupMenuButton<String>(
+      icon: const Icon(Icons.language),
+      tooltip: l10n.language,
+      initialValue: current,
+      onSelected: (v) => ref
+          .read(localeControllerProvider.notifier)
+          .setLocale(v == 'system' ? null : Locale(v)),
+      itemBuilder: (_) => [
+        CheckedPopupMenuItem(
+          value: 'system',
+          checked: current == 'system',
+          child: Text(l10n.languageSystem),
+        ),
+        CheckedPopupMenuItem(
+          value: 'en',
+          checked: current == 'en',
+          child: Text(l10n.languageEnglish),
+        ),
+        CheckedPopupMenuItem(
+          value: 'ru',
+          checked: current == 'ru',
+          child: Text(l10n.languageRussian),
+        ),
+      ],
     );
   }
 }

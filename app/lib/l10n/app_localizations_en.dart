@@ -68,6 +68,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginServerHint => 'https://your-aul-server';
 
   @override
+  String get loginServerHelp =>
+      'Aul\'s public server. Change it only if you host your own.';
+
+  @override
   String get loginEmailLabel => 'Email';
 
   @override

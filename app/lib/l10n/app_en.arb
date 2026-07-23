@@ -72,6 +72,10 @@
   "@loginServerHint": {
     "description": "Placeholder example for the server URL field."
   },
+  "loginServerHelp": "Aul's public server. Change it only if you host your own.",
+  "@loginServerHelp": {
+    "description": "Always-visible helper under the server field, explaining the prefilled value."
+  },
   "loginEmailLabel": "Email",
   "@loginEmailLabel": {
     "description": "Text field label for the email address."

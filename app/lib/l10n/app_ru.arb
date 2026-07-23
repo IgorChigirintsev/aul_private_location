@@ -18,6 +18,7 @@
   "loginSignIn": "Войти",
   "loginServerLabel": "Сервер",
   "loginServerHint": "https://ваш-aul-сервер",
+  "loginServerHelp": "Публичный сервер Aul. Меняйте, только если поднимаете свой.",
   "loginEmailLabel": "Эл. почта",
   "loginPasswordLabel": "Пароль",
   "loginKeyReassurance": "Ключ вашей геолокации никогда не покидает устройство. Сервер хранит только шифртекст.",

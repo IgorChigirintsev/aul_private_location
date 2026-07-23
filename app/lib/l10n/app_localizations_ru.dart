@@ -69,6 +69,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get loginServerHint => 'https://ваш-aul-сервер';
 
   @override
+  String get loginServerHelp =>
+      'Публичный сервер Aul. Меняйте, только если поднимаете свой.';
+
+  @override
   String get loginEmailLabel => 'Эл. почта';
 
   @override

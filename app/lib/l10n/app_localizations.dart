@@ -206,6 +206,12 @@ abstract class AppLocalizations {
   /// **'https://your-aul-server'**
   String get loginServerHint;
 
+  /// Always-visible helper under the server field, explaining the prefilled value.
+  ///
+  /// In en, this message translates to:
+  /// **'Aul\'s public server. Change it only if you host your own.'**
+  String get loginServerHelp;
+
   /// Text field label for the email address.
   ///
   /// In en, this message translates to:
