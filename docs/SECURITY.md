@@ -4,7 +4,7 @@
 
 Please report security issues privately, **not** in public issues.
 
-- Email: `security@aul.app` (PGP key in `docs/security.asc` — TODO before GA).
+- Email: `chigirintsevigor@gmail.com`.
 - We aim to acknowledge within 72 hours and to ship a fix or mitigation within 90
   days, crediting you unless you prefer otherwise.
 - Please include reproduction steps and the commit/version. Do not run tests
